@@ -1,0 +1,92 @@
+import Link from "next/link";
+
+export default async function Slider() {
+  const res = await fetch(`${process.env.API_URL}/categories`, {
+    next: {
+      revalidate: 1000,
+    },
+  });
+  const { data } = await res.json();
+  console.log(data);
+
+  return (
+    <section className="mt-5 mb-15">
+      <div className="flex gap-5 items-start">
+        <div className="w-1/4 max-lg:hidden border border-[#E5E7EB] pt-4 rounded-lg">
+          <button className="ps-4 border-b border-[#E5E7EB] w-full text-left pb-2">
+            <p>
+              {" "}
+              <i className="fa-solid fa-list me-1"></i> All Categories
+            </p>
+          </button>
+
+          <ul>
+            {data.map((category, index) => (
+              <li key={category._id}>
+                <Link href={`/categories/${category._id}`}>
+                  <div
+                    className={`cursor-pointer  w-full py-2 ${
+                      index !== data.length - 1 && "border-b border-[#E5E7EB]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 ps-3 ">
+                      <div
+                        className="w-5 h-5 bg-contain bg-no-repeat bg-center rounded-full"
+                        style={{ backgroundImage: `url(${category.image})` }}
+                      ></div>
+                      <p>{category.name}</p>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex w-full flex-col gap-5">
+          <div className="flex w-full max-lg:flex-col gap-5">
+            <div className="py-6 w-[60%] flex-1 max-lg:w-full bg-[url(/images/home/laptop.jpg)] bg-cover bg-right flex items-center">
+              <div className="ms-6 text-[#1c393d] py-5">
+                <span className="mb-2 block text-sm">Laptop Savings</span>
+                <h2 className="text-3xl font-semibold">
+                  Performance <br />
+                  Meets Design
+                </h2>
+                <p className="my-2">
+                  Save up to $250 on select <br /> laptops
+                </p>
+                <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+                  Shop Now
+                </button>
+              </div>
+            </div>
+            <div className="py-6 w-[40%] max-lg:w-full bg-[url(/images/home/image3.jpg)] bg-cover bg-right flex items-center">
+              <div className="ms-6 text-[#1c393d] ">
+                <span className="mb-2 block text-sm">Limited Time Offer</span>
+                <h2 className="text-3xl font-semibold">Spring Revival</h2>
+                <p className="my-2">Save up to 25% on All Furniture.</p>
+                <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+                  Shop Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className=" py-3 flex-1 max-lg:w-full bg-[url(/images/home/clothes.jpg)] bg-cover bg-right flex items-center">
+            <div className="ms-6 text-[#1c393d] py-5">
+              <span className="mb-2 block text-sm">Clothing Deals</span>
+              <h2 className="text-3xl font-semibold">
+                Style Meets <br /> Comfort
+              </h2>
+              <p className="my-2">
+                Save up to 50% on select <br /> clothing items
+              </p>
+              <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+                Shop Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
