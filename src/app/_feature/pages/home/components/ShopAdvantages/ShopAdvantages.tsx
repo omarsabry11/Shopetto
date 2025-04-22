@@ -82,7 +82,7 @@ export default function ShopAdvantages() {
     },
   ];
   return (
-    <section className="my-15">
+    <section className="my-20">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-[90%] mx-auto ">
         {data.map((item) => (
           <div key={item.id} className="flex items-center  gap-x-2 ">

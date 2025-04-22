@@ -1,9 +1,81 @@
+"use client";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
-import React from "react";
 import { Bounce, ToastContainer } from "react-toastify";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Slider from "react-slick";
+import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 
 export default function FeaturedProducts({ products, title }) {
-  console.log("sss", products);
+  const sliderRef = useRef(null);
+  const [isSliderReady, setIsSliderReady] = useState(false);
+    const { addToUserWishlist } = useContext(WishlistContext);
+  
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      setIsSliderReady(true);
+    }
+  }, []);
+
+  const nextSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const prevSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  let settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    swipeToSlide: true,
+    arrows: false,
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+
+  function handleAddToWishList(productId: string) {
+    console.log("Product:", productId);
+    addToUserWishlist(productId).then((res) => {console.log(res);
+    }).catch((error) => {
+      console.log(error);
+      
+    });
+  }
 
   return (
     <>
@@ -23,12 +95,42 @@ export default function FeaturedProducts({ products, title }) {
       />
 
       <section className="mb-10">
-        <h2 className="main-title">{title}</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 py-5">
+        <div className="flex items-center justify-between mb-6 px-2">
+          <h2 className="text-4xl font-[500]">{title}</h2>
+
+          {isSliderReady && (
+            <div className="flex items-center gap-4">
+              <button
+                onClick={prevSlide}
+                className="bg-main text-white w-12 h-12 rounded-full cursor-pointer"
+              >
+                <i className="fa-solid fa-arrow-left"></i>
+              </button>
+              <button
+                onClick={nextSlide}
+                className="bg-main text-white w-12 h-12 rounded-full cursor-pointer"
+              >
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <Slider {...settings} ref={sliderRef}>
+            {products.map((product) => (
+              <div key={product._id} className="p-2">
+                <ProductCard product={product} onAddToWishList={handleAddToWishList}></ProductCard>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 py-5">
           {products.map((product) => (
             <ProductCard product={product} key={product._id}></ProductCard>
           ))}
-        </div>
+        </div> */}
       </section>
     </>
   );

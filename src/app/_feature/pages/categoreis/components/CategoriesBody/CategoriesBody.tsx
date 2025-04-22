@@ -95,7 +95,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
         </div>
 
         {/* Sidebar Filters */}
-        <div
+        <aside
           className={`
           fixed top-0 left-0 h-full w-64 z-50 p-5 transform transition-transform duration-300 ease-in-out
           ${showMobileFilters ? "translate-x-0" : "-translate-x-full"} 
@@ -185,7 +185,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
               </label>
             </div>
           </div>
-        </div>
+        </aside>
 
         {/* Products */}
         <div className="flex-1 p-5">

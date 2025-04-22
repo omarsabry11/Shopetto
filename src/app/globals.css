@@ -2,8 +2,13 @@
 
 @theme {
   --color-main: #4e04fb;
+  --color-secondary: #1B1A41;
+  /* --color-main: #1B1A41; */
 }
-
+:root
+{
+  --main-color: #4e04fb;
+}
 body {
   /* font-family: "Lexend", sans-serif; */
   font-family: "Outfit", sans-serif;
@@ -15,8 +20,6 @@ body {
 .custom-box-shadow {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .dot-loader {
   display: flex;
@@ -50,4 +53,42 @@ body {
     transform: translateY(-10px);
     opacity: 1;
   }
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 10;
+  width: 2rem !important;
+  height: 2rem !important;
+  background-color: #4e04fb !important;
+  color: white !important;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+
+.statistics .box:hover
+{
+    border-color: var(--main-color);
+}
+
+.statistics .box:hover h2
+{
+    color: white;
+}
+
+.statistics .box:hover p
+{
+    color: white;
+}
+.statistics .box:hover i
+{
+    
+    background-color: white;
+}
+.statistics .box:hover > div
+{
+    background: rgba(255,255,255,0.4);
 }

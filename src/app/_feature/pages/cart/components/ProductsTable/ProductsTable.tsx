@@ -30,12 +30,18 @@ export default function ProductsTable() {
   const { data, isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: getCart,
+    // initialData: () => {
+    //   const cachedData = queryClient.getQueryData(["cart"]);
+    //   return cachedData;
+    // },
   });
 
   useEffect(() => {
     if (data?.data?.data?.products) {
       setProducts(data.data.data.products);
     }
+    console.log(data?.data?.data?.products);
+
     setNumOfCartProducts(data?.data?.numOfCartItems);
     setTotalPrice(data?.data?.data.totalCartPrice);
   }, [data]);
@@ -55,7 +61,7 @@ export default function ProductsTable() {
     setSelectedProductId(() => productId);
     setDeletingProductLoading(() => true);
     removeUserCart(productId)
-      .then((res) => {})
+      .then(() => {})
       .catch((error) => {
         console.log(error);
       })
@@ -78,7 +84,7 @@ export default function ProductsTable() {
               <DotLoader bgColor="black"></DotLoader>
             </div>
           </div>
-        ) : products?.length ? (
+        ) : products?.length > 0 ? (
           <div>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
               <thead className="text-[1.05rem] text-gray-700 bg-gray-50 text-center dark:bg-gray-700 dark:text-gray-400">
@@ -116,26 +122,28 @@ export default function ProductsTable() {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
                   >
                     <td className="p-4">
-                      <Image
-                        style={{ margin: "auto" }}
-                        src={product.product.imageCover}
-                        width={50}
-                        height={100}
-                        alt="product image"
-                      ></Image>
+                      {product?.product?.imageCover && (
+                        <Image
+                          style={{ margin: "auto" }}
+                          src={product?.product?.imageCover}
+                          width={50}
+                          height={100}
+                          alt="product image"
+                        ></Image>
+                      )}
                     </td>
                     <td className="px-6 py-4 text-gray-900 dark:text-white text-lg">
-                      {product.product.title}
+                      {product?.product?.title}
                     </td>
                     <td className="px-6 py-4 text-gray-900 dark:text-white text-xs">
                       <div className="flex items-center gap-2">
                         <div
                           className="w-5 h-5 bg-contain bg-no-repeat bg-center rounded-full"
                           style={{
-                            backgroundImage: `url(${product.product.category.image})`,
+                            backgroundImage: `url(${product?.product?.category?.image})`,
                           }}
                         ></div>
-                        <p>{product.product.category.name}</p>
+                        <p>{product?.product?.category?.name}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-center ">
@@ -166,7 +174,7 @@ export default function ProductsTable() {
                         </button>
                         <div>
                           <p className="text-black font-semibold text-[0.93rem]">
-                            {product.count}
+                            {product?.count}
                           </p>
                         </div>
                         <button
@@ -196,7 +204,7 @@ export default function ProductsTable() {
                       </div>
                     </td>
                     <td className="px-6 py-4 font-semibold text-[1rem] text-gray-900 dark:text-white">
-                      ${product.price}
+                      ${product?.price}
                     </td>
                     <td className="px-6 py-4">
                       {deletingProductLoading &&

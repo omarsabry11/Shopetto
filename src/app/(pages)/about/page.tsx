@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <section className="container mx-auto sm:px-10 px-5 my-10">
-      <div className="flex items-center gap-8 max-lg:flex-col">
+    <section className="container mx-auto sm:px-10 px-5 my-16">
+      <div className="flex items-center gap-8 max-lg:flex-col mb-20">
         <div className=" max-lg:w-full flex-1">
           <h2 className="main-title">Welcome to Shopetto</h2>
           <p className="text-lg text-[#7E7E7E] mb-5">
@@ -61,15 +61,13 @@ export default function About() {
         </div>
       </div>
       <div className="my-14">
-        <h2 className="main-title text-center mt-20">What We Provide?</h2>
+        <h2 className="text-4xl mb-10 font-[500] text-center ">
+          What We Provide?
+        </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-1.webp"
-              className="mx-auto"
-              alt="Best Prices icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-tags text-[3rem] text-[#1B1A41]"></i>
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               Best Prices &amp; Offers
             </h3>
             <p className="text-[#7E7E7E]">
@@ -78,12 +76,8 @@ export default function About() {
             </p>
           </div>
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-2.webp"
-              className="mx-auto"
-              alt="Wide Assortment icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-layer-group text-[3rem] text-[#1B1A41]"></i>
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               Wide Assortment
             </h3>
             <p className="text-[#7E7E7E]">
@@ -92,12 +86,8 @@ export default function About() {
             </p>
           </div>
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-3.webp"
-              className="mx-auto"
-              alt="Free Delivery icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-shipping-fast text-[3rem] text-[#1B1A41]"></i>
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               Free Delivery
             </h3>
             <p className="text-[#7E7E7E]">
@@ -106,12 +96,8 @@ export default function About() {
             </p>
           </div>
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-4.webp"
-              className="mx-auto"
-              alt="Easy Returns icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-exchange-alt text-[3rem] text-[#1B1A41]"></i>
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               Easy Returns
             </h3>
             <p className="text-[#7E7E7E]">
@@ -120,12 +106,9 @@ export default function About() {
             </p>
           </div>
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-5.webp"
-              className="mx-auto"
-              alt="100% Satisfaction icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-check-circle text-[3rem] text-[#1B1A41]"></i>
+
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               100% Satisfaction
             </h3>
             <p className="text-[#7E7E7E]">
@@ -134,12 +117,8 @@ export default function About() {
             </p>
           </div>
           <div className="text-center  p-6 rounded-lg custom-box-shadow">
-            <img
-              src="./images/about/icon-6.webp"
-              className="mx-auto"
-              alt="Great Daily Deal icon"
-            />
-            <h3 className="text-title text-2xl font-semibold my-8">
+            <i className="fas fa-bolt text-[3rem] text-[#1B1A41]"></i>
+            <h3 className="text-title text-2xl text-[#1B1A41] font-[500] my-5">
               Great Daily Deal
             </h3>
             <p className="text-[#7E7E7E]">

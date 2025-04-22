@@ -41,19 +41,19 @@ export default function CartCostDetails({ isCartPage, onChangePaymentType }) {
           </p>
           {!isCartPage && (
             <div className="mb-3">
-              <div className="flex items-center rounded-sm">
+              <div className="flex items-center rounded-sm ">
                 <input
                   id="bordered-radio-1"
                   type="radio"
                   name="bordered-radio"
-                  className="w-4 h-4 bg-red-400 checked:bg-main"
+                  className="w-4 h-4 bg-red-400 checked:bg-main cursor-pointer"
                   value={"cash"}
                   onChange={(e) => onChangePaymentType(e.target.value)}
                   defaultChecked
                 />
                 <label
                   htmlFor="bordered-radio-1"
-                  className="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  className="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
                 >
                   Cash on delivery
                 </label>
@@ -63,13 +63,13 @@ export default function CartCostDetails({ isCartPage, onChangePaymentType }) {
                   id="bordered-radio-2"
                   type="radio"
                   name="bordered-radio"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer"
                   value={"online"}
                   onChange={(e) => onChangePaymentType(e.target.value)}
                 />
                 <label
                   htmlFor="bordered-radio-2"
-                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
                 >
                   Online payment
                 </label>

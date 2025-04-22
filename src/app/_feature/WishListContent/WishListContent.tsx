@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import React, { useCallback, useContext, useEffect, useState } from "react";
@@ -7,34 +8,31 @@ import { CartContext } from "@/app/_core/_contexts/CartContext";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 import Link from "next/link";
 import Image from "next/image";
+import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 
 export default function WishListContent() {
   const [wishListProducts, setWishListProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeletedLoading, setIsDeletedLoading] = useState(false);
-
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const { addUserCart } = useContext(CartContext);
+  const {getWishlistItems } =
+    useContext(WishlistContext);
 
   const getWishList = useCallback((isFirstTime = false) => {
     if (isFirstTime) {
       setIsPageLoading(true);
     }
-
-    axios
-      .get(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
-        headers: {
-          token: localStorage.getItem("userToken"),
-        },
-      })
+    getWishlistItems()
       .then((res) => {
-        console.log("qqqqqqqqqqqqqqq", res.data.data);
-        setWishListProducts(res.data.data);
-        if (isFirstTime) {
-          setIsPageLoading(false);
-        }
-      });
+        setWishListProducts(res?.data?.data);
+      })
+      .finally(() => setIsPageLoading(false));
+  }, []);
+
+  useEffect(() => {
+    getWishList();
   }, []);
 
   const addToCart = useCallback((productId: string) => {
@@ -67,6 +65,7 @@ export default function WishListContent() {
       })
       .then((res) => {
         getWishList();
+        console.log(res);
         setIsDeletedLoading(false);
       });
   }, []);
@@ -95,7 +94,7 @@ export default function WishListContent() {
                   src={"/images/wishlist/box.png"}
                   width={100}
                   height={100}
-                  alt=""
+                  alt="Empty wishlist"
                 ></Image>
                 <h2 className="text-2xl font-[500]">
                   Looks like you don’t have anything saved

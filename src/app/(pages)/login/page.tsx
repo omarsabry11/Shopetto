@@ -1,43 +1,52 @@
 "use client";
+import { TokenContext } from "@/app/_core/_contexts/tokenContext";
+import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 import registerData from "@/app/interfaces/registerData";
 import axios from "axios";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 import * as Yup from "yup";
 
 export default function Login() {
   const router = useRouter();
+
+  const { token, setToken } = useContext(TokenContext);
+  const [isLoading, setIsLoading] = useState(false);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email name is required"),
     password: Yup.string().required("Password is required"),
   });
   function onsubmit(val: registerData) {
+    setIsLoading(true);
     axios
-      .post("http://localhost:3000/api/signin", val)
+      .post("https://ecommerce.routemisr.com/api/v1/auth/signin", val)
       .then((res) => {
-        console.log(res);
-        if (res.data.message === "Success") {
-          router.push("/");
-        }
+        console.log(res.data.token);
+        router.push("/");
+        localStorage.setItem("userToken", res?.data?.token);
+        setToken(() => res?.data?.token);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "gosati@mailinator.com",
+      password: "Asssssss",
     },
     validationSchema,
     onSubmit: onsubmit,
   });
 
   return (
-    <section className="min-h-screen flex items-center justify-center lg:px-28 px-5 max-sm:py-5">
+    <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center lg:px-28 px-5 max-sm:py-5">
       <main className="flex gap-14 w-full">
         <div className="mt-10 flex-grow-1">
           <h2 className="text-4xl font-[500] font-poppins mb-4">Login</h2>
@@ -52,6 +61,7 @@ export default function Login() {
             <div className="flex flex-col flex-grow-1">
               <div className="relative ">
                 <input
+                  value={formik.values.email}
                   type="email"
                   name="email"
                   id="floating_outlined3"
@@ -74,6 +84,7 @@ export default function Login() {
             <div className="flex flex-col flex-grow-1">
               <div className="relative">
                 <input
+                  value={formik.values.password}
                   type="password"
                   name="password"
                   id="floating_outlined4"
@@ -106,9 +117,9 @@ export default function Login() {
 
             <button
               type="submit"
-              className="bg-main text-white py-3 rounded-md cursor-pointer"
+              className="text-white h-[3rem] rounded-md bg-main flex items-center justify-center text-center cursor-pointer"
             >
-              Login
+              {isLoading ? <DotLoader></DotLoader> : "Login"}
             </button>
           </form>
           <p className="text-center">

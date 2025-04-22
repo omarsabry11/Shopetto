@@ -48,11 +48,12 @@ export default function ProductItemDetails({ data }: { data: any }) {
   };
   return (
     <>
-      <section className="mb-20">
-        <div className="flex gap-8">
-          <div className="w-1/2">
-            <div className="p-10 rounded-lg ">
+      <section className="mt-10 mb-20">
+        <div className="flex gap-8 max-lg:flex-col">
+          <div className="flex-1">
+            <div className="p-10">
               <Image
+                className="mx-auto p-1 "
                 src={data.imageCover}
                 height={500}
                 width={400}
@@ -60,9 +61,10 @@ export default function ProductItemDetails({ data }: { data: any }) {
               />
             </div>
 
-            <div className="flex items-center justify-center flex-wrap gap-3 mt-5">
-              {data.images.map((image: string, index: number) => (
+            <div className="flex items-center justify-center flex-wrap gap-5 mt-5">
+              {data.images.slice(0, 4).map((image: string, index: number) => (
                 <Image
+                  className="border border-gray-300 p-1 cursor-pointer"
                   key={index}
                   src={image}
                   height={80}
@@ -71,6 +73,7 @@ export default function ProductItemDetails({ data }: { data: any }) {
                 />
               ))}
             </div>
+
           </div>
 
           <div className="my-10 text-[#292929] flex-1">
@@ -235,6 +238,7 @@ export default function ProductItemDetails({ data }: { data: any }) {
               </Link>
             </div>
           </div>
+          
         </div>
       </section>
     </>

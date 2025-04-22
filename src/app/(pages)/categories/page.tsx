@@ -1,9 +1,10 @@
-import React from "react";
+import { notFound } from "next/navigation";
+
 
 export default function Categories() {
   return (
     <>
-      <h1>cccccccc</h1>
+      {notFound()}
     </>
   );
 }

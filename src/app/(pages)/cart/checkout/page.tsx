@@ -6,12 +6,14 @@ import { useFormik } from "formik";
 import { PaymentData } from "@/app/_feature/interfaces/PaymentData";
 import axios from "axios";
 import { CartContext } from "@/app/_core/_contexts/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function Checkout() {
   const { getUserCart, setTotalPrice, setNumOfCartProducts } =
     useContext(CartContext);
 
   const [cartId, setCartId] = useState(null);
+  const router = useRouter();
 
   const fetchCart = async () => {
     try {
@@ -53,6 +55,27 @@ export default function Checkout() {
         )
         .then((res) => {
           console.log(res);
+          router.push("/allorders");
+        })
+        .catch((err) => {
+          console.error("Order error:", err);
+        });
+    } else if (paymentType === "online") {
+      axios
+        .post(
+          `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+          {
+            shippingAddress: values,
+          },
+          {
+            headers: {
+              token: localStorage.getItem("userToken"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          window.location.href = res?.data?.session?.url;
         })
         .catch((err) => {
           console.error("Order error:", err);

@@ -11,59 +11,50 @@ function WishListItem({
   onAddToCart,
   isLoading,
   selectedProductId,
-  isDeletedLoading
+  isDeletedLoading,
 }) {
   return (
     <>
       <div className="flex gap-8 p-5 custom-box-shadow mb-5 rounded max-lg:flex-col">
-        <Link
-          href={`/product-details/${product?._id}`}
-          className="mx-auto block"
-        >
-          <Image
-            width={150}
-            height={200}
-            src={product?.imageCover}
-            alt={product?.title}
-          ></Image>
-        </Link>
+        <Image
+          className="mx-auto"
+          width={150}
+          height={200}
+          src={product?.imageCover}
+          alt={product?.title}
+        ></Image>
 
         <div className="flex-1">
           <div className="flex justify-between  mb-10 max-xl:flex-col">
-            <Link
-              className="w-3/4 max-xl:w-full mb-3 block"
-              href={`/product-details/${product?._id}`}
-            >
-              <div>
-                <h3 className="text-[#1d2128] w-[70%] max-xl:w-full mb-3 font-[500] text-lg">
-                  {product?.title}
-                </h3>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center gap-1">
-                    <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                    <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                    <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                    <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                    <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                  </div>
-                  <p className="text-[#7c818b] text-xs">
-                    {product?.ratingsAverage} (
-                    {product.reviews ? product.reviews.length : 0} Reviews)
-                  </p>
+            <div className="w-3/4 max-xl:w-full mb-3">
+              <h3 className="text-[#1d2128] w-[70%] max-xl:w-full mb-3 font-[500] text-lg">
+                {product?.title}
+              </h3>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-1">
+                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
+                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
+                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
+                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
+                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
                 </div>
-                <p className="text-sm w-[70%] max-xl:w-full">
-                  {(() => {
-                    const words = product?.description
-                      ?.split(/[\s,]+/)
-                      .filter(Boolean);
-                    const shortDesc = words?.slice(0, 25).join(" ");
-                    return words?.length > 2
-                      ? shortDesc + " see more..."
-                      : shortDesc;
-                  })()}
+                <p className="text-[#7c818b] text-xs">
+                  {product?.ratingsAverage} (
+                  {product.reviews ? product.reviews.length : 0} Reviews)
                 </p>
               </div>
-            </Link>
+              <p className="text-sm w-[70%] max-xl:w-full">
+                {(() => {
+                  const words = product?.description
+                    ?.split(/[\s,]+/)
+                    .filter(Boolean);
+                  const shortDesc = words?.slice(0, 25).join(" ");
+                  return words?.length > 2
+                    ? shortDesc + " see more..."
+                    : shortDesc;
+                })()}
+              </p>
+            </div>
 
             <div className="w-1/4 max-xl:w-full">
               <div className="flex items-center gap-2 mb-5 justify-center">
@@ -77,15 +68,10 @@ function WishListItem({
                   ${product?.price?.toFixed(2)}
                 </p>
               </div>
-              <Link
-                href="/cart/checkout"
-                className="px-5 h-[3rem] border-main border-2 text-main hover:bg-[#E6E9F9] duration-300 rounded-sm cursor-pointer flex-1 flex items-center justify-center mb-3"
-              >
-                <button className="cursor-pointer">Checkout Now</button>
-              </Link>
+
               <button
                 onClick={() => onAddToCart(product?._id)}
-                className="bg-main flex items-center justify-center text-white px-5 h-[3rem] w-full rounded-sm cursor-pointer flex-1"
+                className="bg-main flex items-center justify-center text-white px-5 h-[3rem] w-full rounded-sm cursor-pointer flex-1 mb-3"
               >
                 {" "}
                 {isLoading && selectedProductId === product?._id ? (
@@ -110,6 +96,12 @@ function WishListItem({
                   </>
                 )}
               </button>
+              <Link
+                href={`/product-details/${product?._id}`}
+                className="px-5 h-[3rem] border-main border-2 text-main hover:bg-[#E6E9F9] duration-300 rounded-sm cursor-pointer flex-1 flex items-center justify-center"
+              >
+                <button className="cursor-pointer">View Details</button>
+              </Link>
             </div>
           </div>
 

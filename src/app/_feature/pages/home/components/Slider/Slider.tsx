@@ -7,7 +7,7 @@ export default async function Slider() {
     },
   });
   const { data } = await res.json();
-  console.log(data);
+  
 
   return (
     <section className="mt-5 mb-15">
@@ -55,9 +55,12 @@ export default async function Slider() {
                 <p className="my-2">
                   Save up to $250 on select <br /> laptops
                 </p>
-                <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+                <Link
+                  className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer block w-fit"
+                  href={"/categories/6439d2d167d9aa4ca970649f"}
+                >
                   Shop Now
-                </button>
+                </Link>
               </div>
             </div>
             <div className="py-6 w-[40%] max-lg:w-full bg-[url(/images/home/image3.jpg)] bg-cover bg-right flex items-center">
@@ -65,9 +68,12 @@ export default async function Slider() {
                 <span className="mb-2 block text-sm">Limited Time Offer</span>
                 <h2 className="text-3xl font-semibold">Spring Revival</h2>
                 <p className="my-2">Save up to 25% on All Furniture.</p>
-                <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+                <Link
+                  className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer block w-fit"
+                  href={"/categories/6439d58a0049ad0b52b9003f"}
+                >
                   Shop Now
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -80,9 +86,12 @@ export default async function Slider() {
               <p className="my-2">
                 Save up to 50% on select <br /> clothing items
               </p>
-              <button className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer">
+              <Link
+                className="py-2 px-4 rounded-full border border-[#1c393d] cursor-pointer block w-fit"
+                href={"/categories/6439d5b90049ad0b52b90048"}
+              >
                 Shop Now
-              </button>
+              </Link>
             </div>
           </div>
         </div>
