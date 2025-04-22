@@ -11,11 +11,6 @@ import "slick-carousel/slick/slick-theme.css";
 import TokenContextProvider from "./_core/_contexts/tokenContext";
 import WishlistContextProvider from "./_core/_contexts/wishlistContext";
 
-const outfit = Outfit({
-  variable: "--font-lexend-sans",
-  subsets: ["latin"],
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{

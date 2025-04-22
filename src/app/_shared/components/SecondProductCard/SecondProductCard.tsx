@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 
-export default function SecondProductCard({ product, isWishList }) {
+export default function SecondProductCard({ product }) {
   const { addUserCart } = useContext(CartContext);
   const notify = (message: string) => toast.success(message);
   const [isLoading, setIsLoading] = useState(false);
