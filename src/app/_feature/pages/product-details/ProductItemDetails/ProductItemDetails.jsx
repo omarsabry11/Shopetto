@@ -8,12 +8,10 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function ProductItemDetails({ data }) {
-  console.log("dddddddddd", data);
-
   const { addUserCart } = useContext(CartContext);
-  const notify = (message: string) => toast.success(message);
+  const notify = (message) => toast.success(message);
 
-  const colors: { colorTitle: string; ColorCode: string }[] = [
+  const colors = [
     {
       colorTitle: "Royal Brown",
       ColorCode: "#534029",
@@ -35,11 +33,11 @@ export default function ProductItemDetails({ data }) {
     colorTitle: "Royal Brown",
     ColorCode: "#534029",
   });
-  const sizes: number[] = [6, 8, 10, 14, 18, 20];
+  const sizes = [6, 8, 10, 14, 18, 20];
   const [selectedSize, setSelectedSize] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
 
-  const addToCart = async (productId: string) => {
+  const addToCart = async (productId) => {
     setIsLoading(true);
     const res = await addUserCart(productId);
     notify(res.data.message);
@@ -62,7 +60,7 @@ export default function ProductItemDetails({ data }) {
             </div>
 
             <div className="flex items-center justify-center flex-wrap gap-5 mt-5">
-              {data.images.slice(0, 4).map((image: string, index: number) => (
+              {data.images.slice(0, 4).map((image, index) => (
                 <Image
                   className="border border-gray-300 p-1 cursor-pointer"
                   key={index}
@@ -73,7 +71,6 @@ export default function ProductItemDetails({ data }) {
                 />
               ))}
             </div>
-
           </div>
 
           <div className="my-10 text-[#292929] flex-1">
@@ -238,7 +235,6 @@ export default function ProductItemDetails({ data }) {
               </Link>
             </div>
           </div>
-          
         </div>
       </section>
     </>

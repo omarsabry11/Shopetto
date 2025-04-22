@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-[#1B1A41] text-white pt-10 pb-3">
+      <nav className="bg-secondary text-white pt-10 pb-3">
         <div className="container mx-auto sm:px-10 px-5">
           <div>
             <div className="flex items-center justify-between max-lg:flex-wrap mb-8">

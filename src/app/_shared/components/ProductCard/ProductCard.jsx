@@ -9,12 +9,12 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-type Props = {
-  product: Product;
-  onAddToWishList?: () => void;
-  handleChangeSelectedProduct?: () => void;
-  onRemoveFromWishList?: () => void;
-};
+// type Props = {
+//   product: Product;
+//   onAddToWishList?: () => void;
+//   handleChangeSelectedProduct?: () => void;
+//   onRemoveFromWishList?: () => void;
+// };
 export default function ProductCard({
   product,
   onAddToWishList = () => {},
@@ -27,7 +27,7 @@ export default function ProductCard({
   addToCartLoading = false,
   handleChangeSelectedAddedProduct = () => {},
   selectedAddedProductId = null,
-}: Props) {
+}) {
   return (
     <>
       <div

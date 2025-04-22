@@ -6,7 +6,7 @@ import AllProducts from "./_feature/components/AllProducts/AllProducts";
 import Statistics from "./_feature/pages/home/components/Statistics/Statistics";
 import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Home",
   description: "Home page",
 };
@@ -17,19 +17,16 @@ export default async function Home() {
     },
   });
   const { data } = await res.json();
-  console.log("iiiiiiiiii", data);
 
-  const highestPriceProducts = data
-    .slice()
-    .sort((a, b) => b.price - a.price)
-    .slice(0, 20);
+  // const highestPriceProducts = data
+  //   .slice()
+  //   .sort((a, b) => b.price - a.price)
+  //   .slice(0, 20);
 
-  console.log("ssssss", highestPriceProducts);
 
   const sortedDatesProducts = [...data]
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(5, 20);
-  console.log("tttttt", sortedDatesProducts);
 
   return (
     <>

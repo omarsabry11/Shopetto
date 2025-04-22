@@ -7,25 +7,23 @@ import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 
-export default function AllProducts({ products }: { products: Product[] }) {
+export default function AllProducts({ products }) {
   const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
     useContext(WishlistContext);
   const [wishListProducts, setWishListProducts] = useState([]);
-  const [productIds, setProductIds] = useState<string[]>([]);
+  const [productIds, setProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState(products);
   const [addToWishlistLoading, setAddToWishlistLoading] =
-    useState<boolean>(false);
+    useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
   const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState<boolean>(false);
+    useState(false);
 
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+  const [selectedProductId, setSelectedProductId] = useState(
     null
   );
 
-  const [selectedAddedProductId, setSelectedAddedProductId] = useState<
-    string | null
-  >(null);
+  const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);
   const queryClient = useQueryClient();
 
   const { addUserCart } = useContext(CartContext);
@@ -35,7 +33,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
       const res = await getWishlistItems();
       const products = res?.data?.data || [];
       setWishListProducts(products);
-      setProductIds(products.map((product: Product) => product._id));
+      setProductIds(products.map((product) => product._id));
     } catch (error) {
       console.error("Error fetching wishlist:", error);
     }
@@ -46,7 +44,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
     setAllProducts(products.slice(0, 5));
   }, [getWishlist]);
 
-  const handleAddToWishList = async (productId: string) => {
+  const handleAddToWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await addToUserWishlist(productId);
@@ -60,7 +58,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
     }
   };
 
-  const handleRemoveFromWishList = async (productId: string) => {
+  const handleRemoveFromWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await removeFromUserWishlist(productId);
@@ -73,10 +71,10 @@ export default function AllProducts({ products }: { products: Product[] }) {
     }
   };
 
-  const handleChangeSelectedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedProduct = useCallback((productId) => {
     setSelectedProductId(productId);
   }, []);
-  const handleChangeSelectedAddedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedAddedProduct = useCallback((productId) => {
     setSelectedAddedProductId(productId);
   }, []);
 
@@ -91,13 +89,13 @@ export default function AllProducts({ products }: { products: Product[] }) {
     }
   };
 
-  const handleAddToCart = async (productId: string) => {
+  const handleAddToCart = async (productId) => {
     try {
       setAddToCartLoading(true);
       const res = await addUserCart(productId);
 
       setAddToCartLoading(false);
-      queryClient.setQueryData(["cart"], (oldData: any) => {
+      queryClient.setQueryData(["cart"], (oldData) => {
         return {
           ...oldData,
           data: {

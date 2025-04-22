@@ -1,6 +1,8 @@
 import { Category } from "./Category"
 
 export interface Product {
+    product: any
+    count: number
     sold: number
     images: string[]
     subcategory: Subcategory[]

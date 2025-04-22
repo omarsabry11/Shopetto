@@ -21,15 +21,15 @@ export default function FeaturedProducts({ products, title }) {
   const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
     useContext(WishlistContext);
   const [wishListProducts, setWishListProducts] = useState([]);
-  const [productIds, setProductIds] = useState<string[]>([]);
-  const [allProducts, setAllProducts] = useState<string[]>(products);
+  const [productIds, setProductIds] = useState([]);
+  const [allProducts, setAllProducts] = useState(products);
   const [addToWishlistLoading, setAddToWishlistLoading] =
     useState<boolean>(false);
-  const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState<boolean>(false);
+    useState(false);
 
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+  const [selectedProductId, setSelectedProductId] = useState(
     null
   );
 
@@ -45,7 +45,7 @@ export default function FeaturedProducts({ products, title }) {
       const res = await getWishlistItems();
       const products = res?.data?.data || [];
       setWishListProducts(products);
-      setProductIds(products.map((product: Product) => product._id));
+      setProductIds(products.map((product) => product._id));
     } catch (error) {
       console.error("Error fetching wishlist:", error);
     }
@@ -59,7 +59,7 @@ export default function FeaturedProducts({ products, title }) {
     setAllProducts(products.slice(0, 5));
   }, [getWishlist]);
 
-  const handleAddToWishList = async (productId: string) => {
+  const handleAddToWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await addToUserWishlist(productId);
@@ -73,7 +73,7 @@ export default function FeaturedProducts({ products, title }) {
     }
   };
 
-  const handleRemoveFromWishList = async (productId: string) => {
+  const handleRemoveFromWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await removeFromUserWishlist(productId);
@@ -86,10 +86,10 @@ export default function FeaturedProducts({ products, title }) {
     }
   };
 
-  const handleChangeSelectedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedProduct = useCallback((productId) => {
     setSelectedProductId(productId);
   }, []);
-  const handleChangeSelectedAddedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedAddedProduct = useCallback((productId) => {
     setSelectedAddedProductId(productId);
   }, []);
 
@@ -104,13 +104,13 @@ export default function FeaturedProducts({ products, title }) {
     }
   };
 
-  const handleAddToCart = async (productId: string) => {
+  const handleAddToCart = async (productId) => {
     try {
       setAddToCartLoading(true);
       const res = await addUserCart(productId);
 
       setAddToCartLoading(false);
-      queryClient.setQueryData(["cart"], (oldData: any) => {
+      queryClient.setQueryData(["cart"], (oldData) => {
         return {
           ...oldData,
           data: {

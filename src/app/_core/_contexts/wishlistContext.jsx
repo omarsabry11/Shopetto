@@ -1,26 +1,3 @@
-// import { createContext, useCallback, useMemo, useState } from "react";
-// import axios from "axios";
-
-// export const WishlistContext = createContext();
-
-// export default function WishlistContextProvider({ children }) {
-//   const getWishlistItems = useCallback(() => {
-//     const token = localStorage.getItem("userToken");
-//     return axios.get(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
-//       headers: {
-//         token,
-//       },
-//     });
-//   }, []);
-
-//   const contextValue = useMemo(() => ({ getWishlistItems }), [getWishlistItems]);
-
-//   return (
-//     <WishlistContext.Provider value={contextValue}>
-//       {children}
-//     </WishlistContext.Provider>
-//   );
-// }
 
 "use client";
 import { createContext, useCallback } from "react";
@@ -42,7 +19,7 @@ export default function WishlistContextProvider({ children }) {
     }
   }, []);
 
-  const addToUserWishlist = (productId: string) => {
+  const addToUserWishlist = (productId) => {
     const token = localStorage.getItem("userToken");
 
     return axios.post(
@@ -57,7 +34,7 @@ export default function WishlistContextProvider({ children }) {
       }
     );
   };
-  const removeFromUserWishlist = (productId: string) => {
+  const removeFromUserWishlist = (productId) => {
     const token = localStorage.getItem("userToken");
 
     return axios.delete(

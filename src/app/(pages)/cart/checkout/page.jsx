@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import CartCostDetails from "../_CartCostDetails/CartCostDetails";
 import CartHeader from "@/app/_feature/pages/cart/components/CartHeader/CartHeader";
 import { useFormik } from "formik";
-import { PaymentData } from "@/app/_feature/interfaces/PaymentData";
 import axios from "axios";
 import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useRouter } from "next/navigation";
@@ -37,7 +36,7 @@ export default function Checkout() {
 
   const [paymentType, setPaymentType] = useState("cash");
 
-  const handlePlaceOrder = (values: PaymentData) => {
+  const handlePlaceOrder = (values) => {
     if (paymentType === "cash") {
       console.log(values);
       console.log(cartId);
@@ -92,7 +91,7 @@ export default function Checkout() {
     onSubmit: handlePlaceOrder,
   });
 
-  const handleChangePaymentType = (value: string) => {
+  const handleChangePaymentType = (value) => {
     console.log(value);
     setPaymentType(value);
   };

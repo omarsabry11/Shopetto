@@ -4,13 +4,14 @@ import { jwtDecode } from "jwt-decode";
 import OrdersTable from "@/app/_feature/components/OrdersTable/OrdersTable";
 import axios from "axios";
 import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
+import { UserData } from "@/app/_core/interfaces/userData";
 
 export default function Orders() {
   useEffect(() => {
-    const userData = jwtDecode(localStorage.getItem("userToken")!);
-    console.log(userData);
+    const userData: UserData = jwtDecode(localStorage.getItem("userToken")!);
+
     axios
-      .get(`https://ecommerce.routemisr.com/api/v1/orders/user/${userData.id}`)
+      .get(`https://ecommerce.routemisr.com/api/v1/orders/user/${userData?.id}`)
       .then((res) => {
         console.log(res.data);
         setProducts(res.data[res.data?.length - 1].cartItems);

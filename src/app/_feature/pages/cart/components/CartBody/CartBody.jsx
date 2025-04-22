@@ -7,7 +7,7 @@ export default function CartBody() {
     <>
       <div className="flex gap-5 my-5 items-start max-xl:flex-col">
         <ProductsTable></ProductsTable>
-        <CartCostDetails isCartPage={true}></CartCostDetails>
+        <CartCostDetails isCheckoutPage={false} isCartPage={true}></CartCostDetails>
       </div>
     </>
   );

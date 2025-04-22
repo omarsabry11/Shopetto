@@ -43,7 +43,7 @@ export default function Register() {
       .required("Phone number is required")
       .matches(/01[125][0-9]{8}/, "Phone must be Egyptian number"),
   });
-  function onsubmit(val: registerData) {
+  function onsubmit(val) {
     setIsLoading(true);
     axios
       .post("https://ecommerce.routemisr.com/api/v1/auth/signup", val)
@@ -73,16 +73,8 @@ export default function Register() {
   });
 
   return (
-    <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center">
+    <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center xl:px-10">
       <main className="flex gap-20 w-full">
-        <div className="max-xl:hidden flex items-center">
-          <Image
-            src={"/images/auth/register.svg"}
-            alt=""
-            width={450}
-            height={450}
-          />
-        </div>
         <div className="mt-10 flex-grow-1">
           <h2 className="text-4xl font-[500] font-poppins mb-4">Sign up</h2>
           <p className="text-[#313131]">
@@ -112,8 +104,30 @@ export default function Register() {
                     Name
                   </label>
                 </div>
+
                 {formik.errors.name && formik.touched.name && (
-                  <p className="mt-3">{formik.errors.name}</p>
+                  <div
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert"
+                  >
+                    <svg
+                      className="shrink-0 inline w-4 h-4 me-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span className="sr-only">Info</span>
+                    <div>
+                      <span className="font-medium">
+                        {" "}
+                        {typeof formik.errors.name === "string" &&
+                          formik.errors.name}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -138,7 +152,28 @@ export default function Register() {
                   </label>
                 </div>
                 {formik.errors.email && formik.touched.email && (
-                  <p className="mt-3">{formik.errors.email}</p>
+                  <div
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert"
+                  >
+                    <svg
+                      className="shrink-0 inline w-4 h-4 me-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span className="sr-only">Info</span>
+                    <div>
+                      <span className="font-medium">
+                        {" "}
+                        {typeof formik.errors.email === "string" &&
+                          formik.errors.email}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
 
@@ -161,7 +196,28 @@ export default function Register() {
                   </label>
                 </div>
                 {formik.errors.phone && formik.touched.phone && (
-                  <p className="mt-3">{formik.errors.phone}</p>
+                  <div
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert"
+                  >
+                    <svg
+                      className="shrink-0 inline w-4 h-4 me-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span className="sr-only">Info</span>
+                    <div>
+                      <span className="font-medium">
+                        {" "}
+                        {typeof formik.errors.phone === "string" &&
+                          formik.errors.phone}
+                      </span>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -185,7 +241,28 @@ export default function Register() {
                 </label>
               </div>
               {formik.errors.password && formik.touched.password && (
-                <p className="mt-3">{formik.errors.password}</p>
+                <div
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    className="shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">
+                      {" "}
+                      {typeof formik.errors.password === "string" &&
+                        formik.errors.password}
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -208,7 +285,28 @@ export default function Register() {
                 </label>
               </div>
               {formik.errors.rePassword && formik.touched.rePassword && (
-                <p className="mt-3">{formik.errors.rePassword}</p>
+                <div
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    className="shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">
+                      {" "}
+                      {typeof formik.errors.rePassword === "string" &&
+                        formik.errors.rePassword}
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -221,14 +319,14 @@ export default function Register() {
                 }}
               />
               <p>
-                I agree to all the <span className="text-[#FF8682]">Terms</span>{" "}
-                and <span className="text-[#FF8682]">Privacy Policies</span>
+                I agree to all the <span className="text-red-700">Terms</span>{" "}
+                and <span className="text-red-700">Privacy Policies</span>
               </p>
             </div>
             <button
               disabled={!privacyPolicies}
               type="submit"
-              className={` text-white h-[3rem] rounded-md bg-main flex items-center justify-center text-center ${
+              className={` text-white h-[3rem] rounded-md bg-secondary flex items-center justify-center text-center ${
                 privacyPolicies ? "cursor-pointer" : ""
               }`}
             >
@@ -237,10 +335,18 @@ export default function Register() {
           </form>
           <p className="text-center">
             Don’t have an account?{" "}
-            <Link className="text-[#FF8682]" href={"/login"}>
+            <Link className="text-red-700" href={"/login"}>
               Login
             </Link>{" "}
           </p>
+        </div>
+        <div className="max-xl:hidden flex items-center">
+          <Image
+            src={"/images/auth/register2.svg"}
+            alt=""
+            width={450}
+            height={450}
+          />
         </div>
       </main>
     </section>

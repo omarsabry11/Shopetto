@@ -4,7 +4,9 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -23,6 +25,6 @@
     }
   },
   
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(pages)/product-details/[productId]/page.jsx", "src/app/_feature/pages/product-details/_product/page.jsx", "src/app/(pages)/categories/[categoryDetails]/page.jsx", "src/app/_core/_contexts/wishlistContext.jsx", "src/app/_feature/components/AllProducts/AllProducts.jsx", "src/app/_feature/pages/cart/components/CartBody/CartBody.jsx", "src/app/_feature/pages/categoreis/components/CategoriesBody/CategoriesBody.jsx", "src/app/_feature/pages/home/components/FeaturedProducts/FeaturedProducts.jsx", "src/app/_feature/pages/product-details/components/RelatedProducts/RelatedProducts.jsx", "src/app/_shared/components/ProductCard/ProductCard.jsx", "src/app/page.jsx"],
   "exclude": ["node_modules"]
 }

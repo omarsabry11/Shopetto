@@ -1,7 +1,6 @@
 "use client";
 import { TokenContext } from "@/app/_core/_contexts/tokenContext";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
-import registerData from "@/app/interfaces/registerData";
 import axios from "axios";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -20,7 +19,7 @@ export default function Login() {
     email: Yup.string().required("Email name is required"),
     password: Yup.string().required("Password is required"),
   });
-  function onsubmit(val: registerData) {
+  function onsubmit(val) {
     setIsLoading(true);
     axios
       .post("https://ecommerce.routemisr.com/api/v1/auth/signin", val)
@@ -46,9 +45,17 @@ export default function Login() {
   });
 
   return (
-    <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center lg:px-28 px-5 max-sm:py-5">
-      <main className="flex gap-14 w-full">
-        <div className="mt-10 flex-grow-1">
+    <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center">
+      <main className="flex gap-14 justify-between items-center w-full">
+        <div className="max-xl:hidden">
+          <Image
+            src={"/images/auth/login2.svg"}
+            alt=""
+            width={500}
+            height={500}
+          />
+        </div>
+        <div className="flex-1">
           <h2 className="text-4xl font-[500] font-poppins mb-4">Login</h2>
           <p className="text-[#313131]">
             Login to access your travelwise account
@@ -78,7 +85,27 @@ export default function Login() {
                 </label>
               </div>
               {formik.errors.email && formik.touched.email && (
-                <p className="mt-3">{formik.errors.email}</p>
+                <div
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    className="shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">
+                      {typeof formik.errors.email === "string" &&
+                        formik.errors.email}
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
             <div className="flex flex-col flex-grow-1">
@@ -101,7 +128,27 @@ export default function Login() {
                 </label>
               </div>
               {formik.errors.password && formik.touched.password && (
-                <p className="mt-3">{formik.errors.password}</p>
+                <div
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  role="alert"
+                >
+                  <svg
+                    className="shrink-0 inline w-4 h-4 me-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">
+                      {typeof formik.errors.password === "string" &&
+                        formik.errors.password}
+                    </span>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -110,32 +157,24 @@ export default function Login() {
                 <input type="checkbox" />
                 <p>Remember me</p>
               </div>
-              <Link href={"/forgot-password"} className="text-[#FF8682]">
+              <Link href={"/forgot-password"} className="text-red-700">
                 Forgot Password
               </Link>
             </div>
 
             <button
               type="submit"
-              className="text-white h-[3rem] rounded-md bg-main flex items-center justify-center text-center cursor-pointer"
+              className="text-white h-[3rem] rounded-md bg-secondary flex items-center justify-center text-center cursor-pointer"
             >
               {isLoading ? <DotLoader></DotLoader> : "Login"}
             </button>
           </form>
           <p className="text-center">
             Don’t have an account?{" "}
-            <Link className="text-[#FF8682]" href={"/register"}>
+            <Link className="text-red-700" href={"/register"}>
               Sign up
             </Link>{" "}
           </p>
-        </div>
-        <div className="max-xl:hidden">
-          <Image
-            src={"/images/auth/login.svg"}
-            alt=""
-            width={450}
-            height={450}
-          />
         </div>
       </main>
     </section>

@@ -8,7 +8,7 @@ export default async function Slider() {
     },
   });
   const { data } = await res.json();
-  console.log(data);
+ 
   
 
   return (

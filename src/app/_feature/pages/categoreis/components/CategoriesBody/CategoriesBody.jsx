@@ -16,47 +16,34 @@ import { useQueryClient } from "@tanstack/react-query";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 import Image from "next/image";
 
-function CategoriesBody({
-  products,
-  categories,
-  categoryID,
-  categoryName,
-}: {
-  products: Product[];
-  categories: Category;
-  categoryID: string;
-  categoryName: string;
-}) {
+function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const [selectedCategoryID, setSelectedCategoryID] =
-    useState<string>(categoryID);
+    useState < string > categoryID;
   const [selectedCategoryName, setSelectedCategoryName] =
-    useState<string>(categoryName);
-  const [selectedSort, setSelectedSort] = useState<string>("default");
-  const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(
-    null
-  );
-  const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+    useState < string > categoryName;
+  const [selectedSort, setSelectedSort] = useState < string > "default";
+  const [selectedPriceRange, setSelectedPriceRange] =
+    (useState < string) | (null > null);
+  const [showMobileFilters, setShowMobileFilters] = useState < boolean > false;
   const [arrangementProducts, setArrangementProducts] =
-    useState<string>("grid2");
+    useState < string > "grid2";
 
   const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
     useContext(WishlistContext);
   const [wishListProducts, setWishListProducts] = useState([]);
-  const [productIds, setProductIds] = useState<string[]>([]);
+  const [productIds, setProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState(products);
   const [addToWishlistLoading, setAddToWishlistLoading] =
-    useState<boolean>(false);
-  const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
+    useState < boolean > false;
+  const [addToCartLoading, setAddToCartLoading] = useState < boolean > false;
   const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState<boolean>(false);
+    useState < boolean > false;
 
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(
-    null
-  );
+  const [selectedProductId, setSelectedProductId] =
+    (useState < string) | (null > null);
 
-  const [selectedAddedProductId, setSelectedAddedProductId] = useState<
-    string | null
-  >(null);
+  const [selectedAddedProductId, setSelectedAddedProductId] =
+    (useState < string) | (null > null);
   const queryClient = useQueryClient();
 
   const { addUserCart } = useContext(CartContext);
@@ -66,7 +53,7 @@ function CategoriesBody({
       const res = await getWishlistItems();
       const products = res?.data?.data || [];
       setWishListProducts(products);
-      setProductIds(products.map((product: Product) => product._id));
+      setProductIds(products.map((product) => product._id));
     } catch (error) {
       console.error("Error fetching wishlist:", error);
     }
@@ -77,7 +64,7 @@ function CategoriesBody({
     setAllProducts(products.slice(0, 5));
   }, [getWishlist]);
 
-  const handleAddToWishList = async (productId: string) => {
+  const handleAddToWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await addToUserWishlist(productId);
@@ -91,7 +78,7 @@ function CategoriesBody({
     }
   };
 
-  const handleRemoveFromWishList = async (productId: string) => {
+  const handleRemoveFromWishList = async (productId) => {
     try {
       setAddToWishlistLoading(true);
       const res = await removeFromUserWishlist(productId);
@@ -104,10 +91,10 @@ function CategoriesBody({
     }
   };
 
-  const handleChangeSelectedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedProduct = useCallback((productId) => {
     setSelectedProductId(productId);
   }, []);
-  const handleChangeSelectedAddedProduct = useCallback((productId: string) => {
+  const handleChangeSelectedAddedProduct = useCallback((productId) => {
     setSelectedAddedProductId(productId);
   }, []);
 
@@ -122,13 +109,13 @@ function CategoriesBody({
     }
   };
 
-  const handleAddToCart = async (productId: string) => {
+  const handleAddToCart = async (productId) => {
     try {
       setAddToCartLoading(true);
       const res = await addUserCart(productId);
 
       setAddToCartLoading(false);
-      queryClient.setQueryData(["cart"], (oldData: any) => {
+      queryClient.setQueryData(["cart"], (oldData) => {
         return {
           ...oldData,
           data: {
@@ -143,22 +130,19 @@ function CategoriesBody({
     }
   };
 
-  const handleChangeCategory = useCallback(
-    (categoryId: string, categoryName: string) => {
-      setSelectedCategoryID(categoryId);
-      setSelectedCategoryName(categoryName);
-      setSelectedSort("default");
-      setSelectedPriceRange(null);
-      setShowMobileFilters(false);
-    },
-    []
-  );
+  const handleChangeCategory = useCallback((categoryId, categoryName) => {
+    setSelectedCategoryID(categoryId);
+    setSelectedCategoryName(categoryName);
+    setSelectedSort("default");
+    setSelectedPriceRange(null);
+    setShowMobileFilters(false);
+  }, []);
 
-  const handleChangeSort = useCallback((sortValue: string) => {
+  const handleChangeSort = useCallback((sortValue) => {
     setSelectedSort(sortValue);
   }, []);
 
-  const handleChangePriceRange = useCallback((priceRange: string | null) => {
+  const handleChangePriceRange = useCallback((priceRange) => {
     setSelectedPriceRange(priceRange);
   }, []);
 
@@ -167,18 +151,18 @@ function CategoriesBody({
 
     if (selectedCategoryID) {
       result = result.filter(
-        (product: Product) => product.category._id === selectedCategoryID
+        (product) => product.category._id === selectedCategoryID
       );
     }
 
     if (selectedPriceRange === "firstClass") {
-      result = result.filter((product: Product) => product.price <= 500);
+      result = result.filter((product) => product.price <= 500);
     } else if (selectedPriceRange === "secondClass") {
       result = result.filter(
-        (product: Product) => product.price > 500 && product.price <= 1000
+        (product) => product.price > 500 && product.price <= 1000
       );
     } else if (selectedPriceRange === "thirdClass") {
-      result = result.filter((product: Product) => product.price > 1000);
+      result = result.filter((product) => product.price > 1000);
     }
 
     if (selectedSort === "asc") {
@@ -192,7 +176,7 @@ function CategoriesBody({
     return result;
   }, [products, selectedCategoryID, selectedPriceRange, selectedSort]);
 
-  const handleChangeArrangement = useCallback((arrangement: string) => {
+  const handleChangeArrangement = useCallback((arrangement) => {
     setArrangementProducts(arrangement);
   }, []);
   return (
@@ -257,7 +241,7 @@ function CategoriesBody({
 
           {/* Categories */}
           <ul className="border-b border-b-gray-300 pb-4 ">
-            {categories.map((category: Category) => (
+            {categories.map((category) => (
               <li key={category._id}>
                 <button
                   className={`block w-full text-left p-2 rounded cursor-pointer ${
@@ -449,7 +433,7 @@ function CategoriesBody({
           >
             {filteredProducts.length ? (
               arrangementProducts !== "gridList" ? (
-                filteredProducts.map((product: Product) => (
+                filteredProducts.map((product) => (
                   <ProductCard
                     key={product._id}
                     product={product}
@@ -468,9 +452,9 @@ function CategoriesBody({
                   ></ProductCard>
                 ))
               ) : (
-                filteredProducts.map((product: Product, index: number) => (
+                filteredProducts.map((product) => (
                   <SecondProductCard
-                    key={index}
+                    key={product._id}
                     product={product}
                   ></SecondProductCard>
                 ))

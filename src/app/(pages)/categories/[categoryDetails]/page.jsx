@@ -3,7 +3,7 @@ import CategoriesBody from "@/app/_feature/pages/categoreis/components/Categorie
 import { Metadata } from "next";
 import React from "react";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Categories",
   description: "Categories page",
 };

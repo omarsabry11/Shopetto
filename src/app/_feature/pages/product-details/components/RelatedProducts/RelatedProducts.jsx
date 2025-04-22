@@ -1,19 +1,13 @@
 import FeaturedProducts from "@/app/_feature/pages/home/components/FeaturedProducts/FeaturedProducts";
 import React from "react";
 
-export default async function RelatedProducts({
-  productCategory,
-}: {
-  ProductCategory: string;
-}) {
+export default async function RelatedProducts({ productCategory }) {
   const res = await fetch(`${process.env.API_URL}/products`);
   const { data } = await res.json();
-  console.log("pppp", data);
 
   const filteredProducts = data.filter(
     (product) => product.category.name === productCategory
   );
-  console.log("ffffff", filteredProducts);
 
   return (
     <>

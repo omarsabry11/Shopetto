@@ -5,8 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 
-export default function CartCostDetails({ isCartPage, onChangePaymentType }) {
-  const { totalPrice } = useContext(CartContext);
+export default function CartCostDetails({
+  isCartPage,
+  onChangePaymentType,
+}: {
+  isCartPage?: boolean;
+  onChangePaymentType?: any;
+}) {
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    throw new Error(
+      "CartContext is undefined. Make sure the component is inside CartContextProvider."
+    );
+  }
+
+  const { totalPrice } = cartContext;
   return (
     <>
       <div className="w-1/4 max-xl:w-full border p-4 rounded-xl border-[#F4F4F4] ">
