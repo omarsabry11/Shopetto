@@ -2,7 +2,7 @@ import { Category } from "@/app/_core/interfaces/Category";
 import Link from "next/link";
 
 export default async function Slider() {
-  const res = await fetch(`${process.env.API_URL}/categories`, {
+  const res = await fetch(`https://ecommerce.routemisr.com/api/v1/categories`, {
     next: {
       revalidate: 1000,
     },
