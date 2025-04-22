@@ -4,6 +4,7 @@ import ShopAdvantages from "./_feature/pages/home/components/ShopAdvantages/Shop
 import FeaturedProducts from "./_feature/pages/home/components/FeaturedProducts/FeaturedProducts";
 import AllProducts from "./_feature/components/AllProducts/AllProducts";
 import Statistics from "./_feature/pages/home/components/Statistics/Statistics";
+import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -32,20 +33,21 @@ export default async function Home() {
 
   return (
     <>
-      <Slider></Slider>
-      <ShopAdvantages></ShopAdvantages>
+      <ProtectRoute>
+        <Slider></Slider>
+        <FeaturedProducts
+          title={"Latest Products"}
+          products={sortedDatesProducts}
+        ></FeaturedProducts>
+        <ShopAdvantages></ShopAdvantages>
 
-      <FeaturedProducts
-        title={"Latest Products"}
-        products={sortedDatesProducts}
-      ></FeaturedProducts>
-
-      <AllProducts products={data}></AllProducts>
-      <Statistics></Statistics>
-      {/* <FeaturedProducts
+        <AllProducts products={data}></AllProducts>
+        <Statistics></Statistics>
+        {/* <FeaturedProducts
         title={"Highest Price"}
         products={highestPriceProducts}
       ></FeaturedProducts> */}
+      </ProtectRoute>
     </>
   );
 }

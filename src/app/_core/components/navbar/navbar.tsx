@@ -43,6 +43,7 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* Mobile */}
               <aside
                 id="logo-sidebar"
                 className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out
@@ -67,6 +68,7 @@ export default function Navbar() {
                   <ul className="space-y-2 font-medium my-4">
                     <li>
                       <Link
+                        onClick={() => setIsSidebarOpen(false)}
                         href="/"
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg  hover:bg-gray-100  group"
                       >
@@ -84,6 +86,7 @@ export default function Navbar() {
                     </li>
                     <li>
                       <Link
+                        onClick={() => setIsSidebarOpen(false)}
                         href="/about"
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
@@ -103,6 +106,7 @@ export default function Navbar() {
                     </li>
                     <li>
                       <Link
+                        onClick={() => setIsSidebarOpen(false)}
                         href="/categories/6439d2d167d9aa4ca970649f"
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
@@ -122,6 +126,7 @@ export default function Navbar() {
                     </li>
                     <li>
                       <Link
+                        onClick={() => setIsSidebarOpen(false)}
                         href="cart"
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg  hover:bg-gray-100 group"
                       >
@@ -141,6 +146,7 @@ export default function Navbar() {
                     </li>
                     <li>
                       <Link
+                        onClick={() => setIsSidebarOpen(false)}
                         href="/wishlist"
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
@@ -160,7 +166,10 @@ export default function Navbar() {
                     </li>
                     <li>
                       <button
-                        onClick={handleLogout}
+                        onClick={() => {
+                          handleLogout();
+                          setIsSidebarOpen(false);
+                        }}
                         className="flex items-center py-2 px-3  text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                       >
                         <svg
@@ -201,8 +210,10 @@ export default function Navbar() {
                   />
                 </div>
                 <button
+                  onClick={(e) => e.preventDefault()}
                   type="submit"
-                  className="p-4 ms-2 text-sm font-medium text-white bg-main focus:outline-none"
+                  title="Search"
+                  className="p-4 ms-2 text-sm font-medium text-white bg-main focus:outline-none cursor-pointer"
                 >
                   <svg
                     className="w-4 h-4 "
@@ -258,19 +269,20 @@ export default function Navbar() {
                   </Link>
                 )}
 
-                <svg
-                  width="24"
-                  height="24"
-                  aria-hidden="true"
-                  role="img"
-                  focusable="false"
-                  viewBox="0 0 32 32"
-                  fill="white"
-                  className="cursor-pointer"
-                >
-                  <path d="M16 16c-4.064 0-6.4-2.336-6.4-6.4 0-3.536 2.864-6.4 6.4-6.4s6.4 2.864 6.4 6.4c0 4-2.4 6.4-6.4 6.4zM16 6.4c-1.76 0-3.2 1.44-3.2 3.2 0 2.272 0.928 3.2 3.2 3.2 2.24 0 3.2-0.96 3.2-3.2 0-1.76-1.44-3.2-3.2-3.2z"></path>
-                  <path d="M27.2 28.8h-22.4v-3.2c0-4.416 3.584-8 8-8h6.4c4.416 0 8 3.584 8 8v3.2zM8 25.6h16c0-2.64-2.16-4.8-4.8-4.8h-6.4c-2.64 0-4.8 2.16-4.8 4.8z"></path>
-                </svg>
+                {token ? (
+                  <button
+                    title="Logout"
+                    className="cursor-pointer"
+                    onClick={handleLogout}
+                  >
+                    <i className="fa-solid fa-right-from-bracket text-lg"></i>
+                  </button>
+                ) : (
+                  <div className="flex gap-x-3 font-[500]">
+                    <Link href={"/register"}>Register</Link>
+                    <Link href={"/login"}>Login</Link>
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex items-center justify-between">

@@ -7,7 +7,7 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function ProductItemDetails({ data }: { data: any }) {
+export default function ProductItemDetails({ data }) {
   console.log("dddddddddd", data);
 
   const { addUserCart } = useContext(CartContext);

@@ -1,3 +1,4 @@
+import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 import WishListContent from "@/app/_feature/WishListContent/WishListContent";
 import { Metadata } from "next";
 import React from "react";
@@ -8,12 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function WishList() {
-
-  
-
   return (
     <>
-      <WishListContent></WishListContent>
+      <ProtectRoute>
+        <WishListContent></WishListContent>
+      </ProtectRoute>
     </>
   );
 }

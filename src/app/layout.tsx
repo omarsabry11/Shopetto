@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import TokenContextProvider from "./_core/_contexts/tokenContext";
 import WishlistContextProvider from "./_core/_contexts/wishlistContext";
 import { useEffect } from "react";
+import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 
 const outfit = Outfit({
   variable: "--font-lexend-sans",

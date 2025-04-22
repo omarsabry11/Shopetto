@@ -9,6 +9,7 @@ import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 import Link from "next/link";
 import Image from "next/image";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 
 export default function WishListContent() {
   const [wishListProducts, setWishListProducts] = useState([]);
@@ -17,8 +18,7 @@ export default function WishListContent() {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const { addUserCart } = useContext(CartContext);
-  const {getWishlistItems } =
-    useContext(WishlistContext);
+  const { getWishlistItems } = useContext(WishlistContext);
 
   const getWishList = useCallback((isFirstTime = false) => {
     if (isFirstTime) {
@@ -42,6 +42,7 @@ export default function WishListContent() {
       const res = await addUserCart(productId);
       removeItem(productId, true);
       setIsLoading(false);
+      toast.success(res?.data?.message || "Product added to cart");
       console.log("rrrrrrrrrrrr", res);
     };
     addItem(productId);
@@ -67,11 +68,26 @@ export default function WishListContent() {
         getWishList();
         console.log(res);
         setIsDeletedLoading(false);
+        toast.success(res?.data?.message || "Product removed from wishlist");
       });
   }, []);
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+        className={"text-center"}
+      />
       <section>
         {wishListProducts.length ? (
           <h1 className="text-5xl text-center my-10 font-semibold text-black tracking-wide">

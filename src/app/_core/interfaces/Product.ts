@@ -1,3 +1,5 @@
+import { Category } from "./Category"
+
 export interface Product {
     sold: number
     images: string[]
@@ -23,13 +25,6 @@ export interface Product {
     name: string
     slug: string
     category: string
-  }
-  
-  export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
   }
   
   export interface Brand {

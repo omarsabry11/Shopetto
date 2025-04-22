@@ -1,3 +1,4 @@
+import { Category } from "@/app/_core/interfaces/Category";
 import Link from "next/link";
 
 export default async function Slider() {
@@ -7,6 +8,7 @@ export default async function Slider() {
     },
   });
   const { data } = await res.json();
+  console.log(data);
   
 
   return (
@@ -21,7 +23,7 @@ export default async function Slider() {
           </button>
 
           <ul>
-            {data.map((category, index) => (
+            {data.map((category:Category, index:number) => (
               <li key={category._id}>
                 <Link href={`/categories/${category._id}`}>
                   <div

@@ -7,10 +7,13 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
+import { Product } from "@/app/_core/interfaces/Product";
 
 export default function ProductsTable() {
-  const [selectedProductId, setSelectedProductId] = useState(null);
-  const [products, setProducts] = useState();
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
+  const [products, setProducts] = useState<Product[]>();
   const [deletingProductLoading, setDeletingProductLoading] = useState(false);
 
   const {
@@ -48,7 +51,7 @@ export default function ProductsTable() {
 
   function updateCart(productId: string, count: number) {
     updateUserCart(productId, count)
-      .then((res) => {})
+      .then(() => {})
       .catch((error) => {
         console.log(error);
       })
@@ -116,7 +119,7 @@ export default function ProductsTable() {
                 </tr>
               </thead>
               <tbody>
-                {products?.map((product) => (
+                {products?.map((product: Product) => (
                   <tr
                     key={product._id}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -214,6 +217,7 @@ export default function ProductsTable() {
                         </div>
                       ) : (
                         <button
+                          title="Remove product from cart"
                           onClick={() => removeFromCart(product.product.id)}
                           className={`${
                             !deletingProductLoading && "cursor-pointer"
@@ -251,8 +255,8 @@ export default function ProductsTable() {
             ></Image>
             <h2 className="text-2xl font-[500]">Your cart is empty</h2>
             <p className="text-lg ">
-              Don't miss out on great deals! Start shopping or Sign in to view
-              products added.
+              Don&apos;t miss out on great deals! Start shopping or Sign in to
+              view products added.
             </p>
             <Link
               href={"/"}

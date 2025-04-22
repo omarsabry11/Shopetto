@@ -18,34 +18,16 @@ type Props = {
 export default function ProductCard({
   product,
   onAddToWishList = () => {},
-  wishListProducts = [],
   productIds = [],
   addToWishlistLoading = false,
   handleChangeSelectedProduct = () => {},
   selectedProductId = null,
   onRemoveFromWishList = () => {},
+  onAddToCart = () => {},
+  addToCartLoading = false,
+  handleChangeSelectedAddedProduct = () => {},
+  selectedAddedProductId = null,
 }: Props) {
-  const { addUserCart } = useContext(CartContext);
-  const [isLoading, setIsLoading] = useState(false);
-  const notify = (message: string) => toast.success(message);
-
-  const queryClient = useQueryClient();
-
-  async function addToCart(productId: string) {
-    setIsLoading(true);
-    const res = await addUserCart(productId);
-    queryClient.setQueryData(["cart"], (oldData: any) => {
-      return {
-        ...oldData,
-        data: {
-          ...oldData?.data,
-          data: res?.data?.data,
-        },
-      };
-    });
-    notify(res.data.message);
-    setIsLoading(false);
-  }
   return (
     <>
       <div
@@ -146,10 +128,20 @@ export default function ProductCard({
 
         <div>
           <button
-            onClick={() => addToCart(product._id)}
-            className="bg-main text-white w-full h-[2rem] flex items-center justify-center rounded-md cursor-pointer mb-2"
+            disabled={addToCartLoading}
+            onClick={() => {
+              handleChangeSelectedAddedProduct(product._id);
+              onAddToCart(product._id);
+            }}
+            className={`bg-main text-white w-full h-[2rem] flex items-center justify-center rounded-md ${
+              !addToCartLoading && "cursor-pointer"
+            }  mb-2`}
           >
-            {isLoading ? <DotLoader></DotLoader> : "Add To Cart"}
+            {addToCartLoading && selectedAddedProductId === product._id ? (
+              <DotLoader></DotLoader>
+            ) : (
+              "Add To Cart"
+            )}
           </button>
           <Link
             href={`/product-details/${product._id}`}

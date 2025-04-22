@@ -1,3 +1,4 @@
+import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 import CategoriesBody from "@/app/_feature/pages/categoreis/components/CategoriesBody/CategoriesBody";
 import { Metadata } from "next";
 import React from "react";
@@ -41,13 +42,15 @@ export default async function CategoryDetails({ params }) {
   console.log("NAmeeeeee", categoryName);
 
   return (
-    <section className="mt-5">
-      <CategoriesBody
-        products={data}
-        categories={categories}
-        categoryID={categoryID}
-        categoryName={categoryName?.data?.name}
-      ></CategoriesBody>
-    </section>
+    <ProtectRoute>
+      <section className="mt-5">
+        <CategoriesBody
+          products={data}
+          categories={categories}
+          categoryID={categoryID}
+          categoryName={categoryName?.data?.name}
+        ></CategoriesBody>
+      </section>
+    </ProtectRoute>
   );
 }

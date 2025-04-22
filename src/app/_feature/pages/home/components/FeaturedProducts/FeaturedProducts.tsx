@@ -1,21 +1,129 @@
 "use client";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
-import { Bounce, ToastContainer } from "react-toastify";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Slider from "react-slick";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
+import { CartContext } from "@/app/_core/_contexts/CartContext";
+import { useQueryClient } from "@tanstack/react-query";
+import { Product } from "@/app/_core/interfaces/Product";
 
 export default function FeaturedProducts({ products, title }) {
   const sliderRef = useRef(null);
   const [isSliderReady, setIsSliderReady] = useState(false);
-    const { addToUserWishlist } = useContext(WishlistContext);
-  
+
+  const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
+    useContext(WishlistContext);
+  const [wishListProducts, setWishListProducts] = useState([]);
+  const [productIds, setProductIds] = useState<string[]>([]);
+  const [allProducts, setAllProducts] = useState<string[]>(products);
+  const [addToWishlistLoading, setAddToWishlistLoading] =
+    useState<boolean>(false);
+  const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
+  const [isShowingAllProducts, setIsShowingAllProducts] =
+    useState<boolean>(false);
+
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
+
+  const [selectedAddedProductId, setSelectedAddedProductId] = useState<
+    string | null
+  >(null);
+  const queryClient = useQueryClient();
+
+  const { addUserCart } = useContext(CartContext);
+
+  const getWishlist = useCallback(async () => {
+    try {
+      const res = await getWishlistItems();
+      const products = res?.data?.data || [];
+      setWishListProducts(products);
+      setProductIds(products.map((product: Product) => product._id));
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
+    }
+  }, []);
 
   useEffect(() => {
     if (sliderRef.current) {
       setIsSliderReady(true);
     }
+    getWishlist();
+    setAllProducts(products.slice(0, 5));
+  }, [getWishlist]);
+
+  const handleAddToWishList = async (productId: string) => {
+    try {
+      setAddToWishlistLoading(true);
+      const res = await addToUserWishlist(productId);
+      console.log(res.data.message);
+
+      await getWishlist();
+      setAddToWishlistLoading(false);
+      toast.success(res?.data?.message || "Product added to wishlist");
+    } catch (error) {
+      console.error("Failed to add to wishlist:", error);
+    }
+  };
+
+  const handleRemoveFromWishList = async (productId: string) => {
+    try {
+      setAddToWishlistLoading(true);
+      const res = await removeFromUserWishlist(productId);
+
+      await getWishlist();
+      setAddToWishlistLoading(false);
+      toast.success(res?.data?.message || "Product removed from wishlist");
+    } catch (err) {
+      console.log("Failed to remove from wishlist", err);
+    }
+  };
+
+  const handleChangeSelectedProduct = useCallback((productId: string) => {
+    setSelectedProductId(productId);
   }, []);
+  const handleChangeSelectedAddedProduct = useCallback((productId: string) => {
+    setSelectedAddedProductId(productId);
+  }, []);
+
+  const handleChangeShowingProducts = () => {
+    setIsShowingAllProducts((prev) => !prev);
+    console.log(isShowingAllProducts);
+
+    if (!isShowingAllProducts) {
+      setAllProducts([...products]);
+    } else {
+      setAllProducts(products.slice(0, 5));
+    }
+  };
+
+  const handleAddToCart = async (productId: string) => {
+    try {
+      setAddToCartLoading(true);
+      const res = await addUserCart(productId);
+
+      setAddToCartLoading(false);
+      queryClient.setQueryData(["cart"], (oldData: any) => {
+        return {
+          ...oldData,
+          data: {
+            ...oldData?.data,
+            data: res?.data?.data,
+          },
+        };
+      });
+      toast.success(res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const nextSlide = () => {
     if (sliderRef.current) {
@@ -67,16 +175,6 @@ export default function FeaturedProducts({ products, title }) {
     ],
   };
 
-
-  function handleAddToWishList(productId: string) {
-    console.log("Product:", productId);
-    addToUserWishlist(productId).then((res) => {console.log(res);
-    }).catch((error) => {
-      console.log(error);
-      
-    });
-  }
-
   return (
     <>
       <ToastContainer
@@ -120,7 +218,22 @@ export default function FeaturedProducts({ products, title }) {
           <Slider {...settings} ref={sliderRef}>
             {products.map((product) => (
               <div key={product._id} className="p-2">
-                <ProductCard product={product} onAddToWishList={handleAddToWishList}></ProductCard>
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  onAddToWishList={handleAddToWishList}
+                  productIds={productIds}
+                  addToWishlistLoading={addToWishlistLoading}
+                  handleChangeSelectedProduct={handleChangeSelectedProduct}
+                  selectedProductId={selectedProductId}
+                  onRemoveFromWishList={handleRemoveFromWishList}
+                  onAddToCart={handleAddToCart}
+                  addToCartLoading={addToCartLoading}
+                  handleChangeSelectedAddedProduct={
+                    handleChangeSelectedAddedProduct
+                  }
+                  selectedAddedProductId={selectedAddedProductId}
+                ></ProductCard>
               </div>
             ))}
           </Slider>

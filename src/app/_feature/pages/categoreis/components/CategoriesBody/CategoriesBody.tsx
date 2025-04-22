@@ -1,31 +1,164 @@
 "use client";
-import React, { useState, useMemo, useCallback } from "react";
-import { Bounce, ToastContainer } from "react-toastify";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useContext,
+  useEffect,
+} from "react";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
 import SecondProductCard from "@/app/_shared/components/SecondProductCard/SecondProductCard";
+import { Product } from "@/app/_core/interfaces/Product";
+import { Category } from "@/app/_core/interfaces/Category";
+import { CartContext } from "@/app/_core/_contexts/CartContext";
+import { useQueryClient } from "@tanstack/react-query";
+import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
+import Image from "next/image";
 
-function CategoriesBody({ products, categories, categoryID, categoryName }) {
-  const [selectedCategoryID, setSelectedCategoryID] = useState(categoryID);
+function CategoriesBody({
+  products,
+  categories,
+  categoryID,
+  categoryName,
+}: {
+  products: Product[];
+  categories: Category;
+  categoryID: string;
+  categoryName: string;
+}) {
+  const [selectedCategoryID, setSelectedCategoryID] =
+    useState<string>(categoryID);
   const [selectedCategoryName, setSelectedCategoryName] =
-    useState(categoryName);
-  const [selectedSort, setSelectedSort] = useState("default");
-  const [selectedPriceRange, setSelectedPriceRange] = useState(null);
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const [arrangementProducts, setArrangementProducts] = useState("grid2");
+    useState<string>(categoryName);
+  const [selectedSort, setSelectedSort] = useState<string>("default");
+  const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(
+    null
+  );
+  const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+  const [arrangementProducts, setArrangementProducts] =
+    useState<string>("grid2");
 
-  const handleChangeCategory = useCallback((categoryId, categoryName) => {
-    setSelectedCategoryID(categoryId);
-    setSelectedCategoryName(categoryName);
-    setSelectedSort("default");
-    setSelectedPriceRange(null);
-    setShowMobileFilters(false);
+  const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
+    useContext(WishlistContext);
+  const [wishListProducts, setWishListProducts] = useState([]);
+  const [productIds, setProductIds] = useState<string[]>([]);
+  const [allProducts, setAllProducts] = useState(products);
+  const [addToWishlistLoading, setAddToWishlistLoading] =
+    useState<boolean>(false);
+  const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false);
+  const [isShowingAllProducts, setIsShowingAllProducts] =
+    useState<boolean>(false);
+
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
+
+  const [selectedAddedProductId, setSelectedAddedProductId] = useState<
+    string | null
+  >(null);
+  const queryClient = useQueryClient();
+
+  const { addUserCart } = useContext(CartContext);
+
+  const getWishlist = useCallback(async () => {
+    try {
+      const res = await getWishlistItems();
+      const products = res?.data?.data || [];
+      setWishListProducts(products);
+      setProductIds(products.map((product: Product) => product._id));
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
+    }
   }, []);
 
-  const handleChangeSort = useCallback((sortValue) => {
+  useEffect(() => {
+    getWishlist();
+    setAllProducts(products.slice(0, 5));
+  }, [getWishlist]);
+
+  const handleAddToWishList = async (productId: string) => {
+    try {
+      setAddToWishlistLoading(true);
+      const res = await addToUserWishlist(productId);
+      console.log(res.data.message);
+
+      await getWishlist();
+      setAddToWishlistLoading(false);
+      toast.success(res?.data?.message || "Product added to wishlist");
+    } catch (error) {
+      console.error("Failed to add to wishlist:", error);
+    }
+  };
+
+  const handleRemoveFromWishList = async (productId: string) => {
+    try {
+      setAddToWishlistLoading(true);
+      const res = await removeFromUserWishlist(productId);
+
+      await getWishlist();
+      setAddToWishlistLoading(false);
+      toast.success(res?.data?.message || "Product removed from wishlist");
+    } catch (err) {
+      console.log("Failed to remove from wishlist", err);
+    }
+  };
+
+  const handleChangeSelectedProduct = useCallback((productId: string) => {
+    setSelectedProductId(productId);
+  }, []);
+  const handleChangeSelectedAddedProduct = useCallback((productId: string) => {
+    setSelectedAddedProductId(productId);
+  }, []);
+
+  const handleChangeShowingProducts = () => {
+    setIsShowingAllProducts((prev) => !prev);
+    console.log(isShowingAllProducts);
+
+    if (!isShowingAllProducts) {
+      setAllProducts([...products]);
+    } else {
+      setAllProducts(products.slice(0, 5));
+    }
+  };
+
+  const handleAddToCart = async (productId: string) => {
+    try {
+      setAddToCartLoading(true);
+      const res = await addUserCart(productId);
+
+      setAddToCartLoading(false);
+      queryClient.setQueryData(["cart"], (oldData: any) => {
+        return {
+          ...oldData,
+          data: {
+            ...oldData?.data,
+            data: res?.data?.data,
+          },
+        };
+      });
+      toast.success(res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeCategory = useCallback(
+    (categoryId: string, categoryName: string) => {
+      setSelectedCategoryID(categoryId);
+      setSelectedCategoryName(categoryName);
+      setSelectedSort("default");
+      setSelectedPriceRange(null);
+      setShowMobileFilters(false);
+    },
+    []
+  );
+
+  const handleChangeSort = useCallback((sortValue: string) => {
     setSelectedSort(sortValue);
   }, []);
 
-  const handleChangePriceRange = useCallback((priceRange) => {
+  const handleChangePriceRange = useCallback((priceRange: string | null) => {
     setSelectedPriceRange(priceRange);
   }, []);
 
@@ -34,18 +167,18 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
 
     if (selectedCategoryID) {
       result = result.filter(
-        (product) => product.category._id === selectedCategoryID
+        (product: Product) => product.category._id === selectedCategoryID
       );
     }
 
     if (selectedPriceRange === "firstClass") {
-      result = result.filter((product) => product.price <= 500);
+      result = result.filter((product: Product) => product.price <= 500);
     } else if (selectedPriceRange === "secondClass") {
       result = result.filter(
-        (product) => product.price > 500 && product.price <= 1000
+        (product: Product) => product.price > 500 && product.price <= 1000
       );
     } else if (selectedPriceRange === "thirdClass") {
-      result = result.filter((product) => product.price > 1000);
+      result = result.filter((product: Product) => product.price > 1000);
     }
 
     if (selectedSort === "asc") {
@@ -59,9 +192,9 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
     return result;
   }, [products, selectedCategoryID, selectedPriceRange, selectedSort]);
 
-  const handleChangeArrangement = useCallback((arrangement) => {
+  const handleChangeArrangement = useCallback((arrangement: string) => {
     setArrangementProducts(arrangement);
-  });
+  }, []);
   return (
     <>
       <ToastContainer
@@ -79,7 +212,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
         className={"text-center"}
       />
       <section className="mb-10">
-        <div className="h-[17rem] flex-1 max-lg:w-full bg-[url(/images/categories/mobile.jpg)] bg-cover flex items-center">
+        <div className="h-[20rem] flex-1 max-lg:w-full bg-[url(/images/categories/shoppetoCover.jpg)] bg-cover bg-center  flex items-center">
           <h2 className="ps-10 text-3xl font-bold">{selectedCategoryName}</h2>
         </div>
       </section>
@@ -124,7 +257,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
 
           {/* Categories */}
           <ul className="border-b border-b-gray-300 pb-4 ">
-            {categories.map((category) => (
+            {categories.map((category: Category) => (
               <li key={category._id}>
                 <button
                   className={`block w-full text-left p-2 rounded cursor-pointer ${
@@ -200,6 +333,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
                 Sort:
               </label>
               <select
+                title="Sort"
                 value={selectedSort}
                 onChange={(e) => handleChangeSort(e.target.value)}
                 className="w-full p-1 border border-gray-200 rounded cursor-pointer"
@@ -212,6 +346,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
             </div>
             <div className="flex items-center gap-2 max-md:hidden">
               <button
+                title="Grid 2"
                 className="cursor-pointer"
                 onClick={() => handleChangeArrangement("grid2")}
               >
@@ -228,6 +363,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
                 </svg>
               </button>
               <button
+                title="Grid 3"
                 className="cursor-pointer"
                 onClick={() => handleChangeArrangement("grid3")}
               >
@@ -248,6 +384,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
                 </svg>
               </button>
               <button
+                title="Grid 4"
                 className="cursor-pointer"
                 onClick={() => handleChangeArrangement("grid4")}
               >
@@ -274,6 +411,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
                 </svg>
               </button>
               <button
+                title="Grid List"
                 className="cursor-pointer"
                 onClick={() => handleChangeArrangement("gridList")}
               >
@@ -295,6 +433,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
               </button>
             </div>
           </div>
+
           <div
             className={`grid ${
               arrangementProducts === "grid2"
@@ -310,11 +449,26 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
           >
             {filteredProducts.length ? (
               arrangementProducts !== "gridList" ? (
-                filteredProducts.map((product, index) => (
-                  <ProductCard key={index} product={product}></ProductCard>
+                filteredProducts.map((product: Product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    onAddToWishList={handleAddToWishList}
+                    productIds={productIds}
+                    addToWishlistLoading={addToWishlistLoading}
+                    handleChangeSelectedProduct={handleChangeSelectedProduct}
+                    selectedProductId={selectedProductId}
+                    onRemoveFromWishList={handleRemoveFromWishList}
+                    onAddToCart={handleAddToCart}
+                    addToCartLoading={addToCartLoading}
+                    handleChangeSelectedAddedProduct={
+                      handleChangeSelectedAddedProduct
+                    }
+                    selectedAddedProductId={selectedAddedProductId}
+                  ></ProductCard>
                 ))
               ) : (
-                filteredProducts.map((product, index) => (
+                filteredProducts.map((product: Product, index: number) => (
                   <SecondProductCard
                     key={index}
                     product={product}
@@ -322,7 +476,18 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
                 ))
               )
             ) : (
-              <h2>No Products Available</h2>
+              <div className="col-span-full min-h-[calc(100vh-15rem)] flex flex-col items-center justify-center text-center  w-full">
+                <Image
+                  className="mx-auto"
+                  src={"/images/cart/emptyBag.svg"}
+                  width={80}
+                  height={80}
+                  alt={"Bag Image"}
+                ></Image>
+                <h2 className="text-3xl font-[500] m-0">
+                  No Products Available
+                </h2>
+              </div>
             )}
           </div>
         </div>

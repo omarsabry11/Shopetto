@@ -7,6 +7,7 @@ import { PaymentData } from "@/app/_feature/interfaces/PaymentData";
 import axios from "axios";
 import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useRouter } from "next/navigation";
+import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 
 export default function Checkout() {
   const { getUserCart, setTotalPrice, setNumOfCartProducts } =
@@ -98,116 +99,118 @@ export default function Checkout() {
 
   return (
     <>
-      <section className="my-10 ">
-        <div>
-          <div className="flex gap-5 my-5 items-start max-xl:flex-col">
-            <div className="w-3/4 max-xl:w-full">
-              <CartHeader isCartPage={false}></CartHeader>
+      <ProtectRoute>
+        <section className="my-10 ">
+          <div>
+            <div className="flex gap-5 my-5 items-start max-xl:flex-col">
+              <div className="w-3/4 max-xl:w-full">
+                <CartHeader isCartPage={false}></CartHeader>
 
-              <form
-                id="myForm"
-                className="my-10 flex flex-col gap-5"
-                onSubmit={formik.handleSubmit}
-              >
-                <div className="flex items-center gap-6 max-md:flex-col">
-                  <div className="flex-1 max-md:w-full">
-                    <label
-                      className="text-[#46494F] mb-2 block font-[500]"
-                      htmlFor="firstName"
-                    >
-                      First Name *
-                    </label>
+                <form
+                  id="myForm"
+                  className="my-10 flex flex-col gap-5"
+                  onSubmit={formik.handleSubmit}
+                >
+                  <div className="flex items-center gap-6 max-md:flex-col">
+                    <div className="flex-1 max-md:w-full">
+                      <label
+                        className="text-[#46494F] mb-2 block font-[500]"
+                        htmlFor="firstName"
+                      >
+                        First Name *
+                      </label>
 
-                    <input
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      className="border border-gray-400 p-2 rounded-lg w-full"
-                    />
+                      <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        className="border border-gray-400 p-2 rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="flex-1 max-md:w-full">
+                      <label
+                        className="text-[#46494F] mb-2 block font-[500]"
+                        htmlFor="lastName"
+                      >
+                        Last Name *
+                      </label>
+
+                      <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        className="border border-gray-400 p-2 rounded-lg w-full"
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1 max-md:w-full">
-                    <label
-                      className="text-[#46494F] mb-2 block font-[500]"
-                      htmlFor="lastName"
-                    >
-                      Last Name *
-                    </label>
 
-                    <input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      className="border border-gray-400 p-2 rounded-lg w-full"
-                    />
+                  <div className="flex items-center gap-6 max-md:flex-col">
+                    <div className="flex-1 max-md:w-full">
+                      <label
+                        className="text-[#46494F] mb-2 block font-[500]"
+                        htmlFor="city"
+                      >
+                        City *
+                      </label>
+
+                      <input
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        type="text"
+                        name="city"
+                        id="city"
+                        className="border border-gray-400 p-2 rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="flex-1 max-md:w-full">
+                      <label
+                        className="text-[#46494F] mb-2 block font-[500]"
+                        htmlFor="phone"
+                      >
+                        Phone *
+                      </label>
+
+                      <input
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        type="tel"
+                        name="phone"
+                        id="phone"
+                        className="border border-gray-400 p-2 rounded-lg w-full"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-6 max-md:flex-col">
-                  <div className="flex-1 max-md:w-full">
+                  <div>
                     <label
                       className="text-[#46494F] mb-2 block font-[500]"
-                      htmlFor="city"
+                      htmlFor="details"
                     >
-                      City *
+                      Details *
                     </label>
-
-                    <input
+                    <textarea
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      type="text"
-                      name="city"
-                      id="city"
-                      className="border border-gray-400 p-2 rounded-lg w-full"
-                    />
+                      name="details"
+                      id="details"
+                      className="border border-gray-400 p-2 rounded-lg w-full h-[6rem]"
+                    ></textarea>
                   </div>
-                  <div className="flex-1 max-md:w-full">
-                    <label
-                      className="text-[#46494F] mb-2 block font-[500]"
-                      htmlFor="phone"
-                    >
-                      Phone *
-                    </label>
-
-                    <input
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      type="tel"
-                      name="phone"
-                      id="phone"
-                      className="border border-gray-400 p-2 rounded-lg w-full"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    className="text-[#46494F] mb-2 block font-[500]"
-                    htmlFor="details"
-                  >
-                    Details *
-                  </label>
-                  <textarea
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    name="details"
-                    id="details"
-                    className="border border-gray-400 p-2 rounded-lg w-full h-[6rem]"
-                  ></textarea>
-                </div>
-                {/* <button type="submit" className="bg-main text-white text-center py-2 rounded-full block w-full font-[500] cursor-pointer">
+                  {/* <button type="submit" className="bg-main text-white text-center py-2 rounded-full block w-full font-[500] cursor-pointer">
                   Place Order | $
                   {totalPrice.toFixed(2)}
                 </button> */}
-              </form>
-            </div>
+                </form>
+              </div>
 
-            <CartCostDetails
-              onChangePaymentType={handleChangePaymentType}
-              isCartPage={false}
-            ></CartCostDetails>
+              <CartCostDetails
+                onChangePaymentType={handleChangePaymentType}
+                isCartPage={false}
+              ></CartCostDetails>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ProtectRoute>
     </>
   );
 }

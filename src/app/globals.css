@@ -2,11 +2,9 @@
 
 @theme {
   --color-main: #4e04fb;
-  --color-secondary: #1B1A41;
-  /* --color-main: #1B1A41; */
+  --color-secondary: #1b1a41;
 }
-:root
-{
+:root {
   --main-color: #4e04fb;
 }
 body {
@@ -68,27 +66,20 @@ body {
   align-items: center !important;
 }
 
-
-.statistics .box:hover
-{
-    border-color: var(--main-color);
+.statistics .box:hover {
+  border-color: var(--main-color);
 }
 
-.statistics .box:hover h2
-{
-    color: white;
+.statistics .box:hover h2 {
+  color: white;
 }
 
-.statistics .box:hover p
-{
-    color: white;
+.statistics .box:hover p {
+  color: white;
 }
-.statistics .box:hover i
-{
-    
-    background-color: white;
+.statistics .box:hover i {
+  background-color: white;
 }
-.statistics .box:hover > div
-{
-    background: rgba(255,255,255,0.4);
+.statistics .box:hover > div {
+  background: rgba(255, 255, 255, 0.4);
 }
