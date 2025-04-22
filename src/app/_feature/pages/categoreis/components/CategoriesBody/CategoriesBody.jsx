@@ -18,15 +18,14 @@ import Image from "next/image";
 
 function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const [selectedCategoryID, setSelectedCategoryID] =
-    useState < string > categoryID;
+    useState (categoryID);
   const [selectedCategoryName, setSelectedCategoryName] =
-    useState < string > categoryName;
-  const [selectedSort, setSelectedSort] = useState < string > "default";
-  const [selectedPriceRange, setSelectedPriceRange] =
-    (useState < string) | (null > null);
-  const [showMobileFilters, setShowMobileFilters] = useState < boolean > false;
+    useState  (categoryName);
+  const [selectedSort, setSelectedSort] = useState ("default")
+  const [selectedPriceRange, setSelectedPriceRange] =useState(null)
+  const [showMobileFilters, setShowMobileFilters] = useState (false);
   const [arrangementProducts, setArrangementProducts] =
-    useState < string > "grid2";
+    useState ("grid2");
 
   const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
     useContext(WishlistContext);
@@ -34,16 +33,14 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const [productIds, setProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState(products);
   const [addToWishlistLoading, setAddToWishlistLoading] =
-    useState < boolean > false;
-  const [addToCartLoading, setAddToCartLoading] = useState < boolean > false;
+    useState(false);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState < boolean > false;
+    useState(false);
 
-  const [selectedProductId, setSelectedProductId] =
-    (useState < string) | (null > null);
+  const [selectedProductId, setSelectedProductId] =useState(null)
 
-  const [selectedAddedProductId, setSelectedAddedProductId] =
-    (useState < string) | (null > null);
+  const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);
   const queryClient = useQueryClient();
 
   const { addUserCart } = useContext(CartContext);

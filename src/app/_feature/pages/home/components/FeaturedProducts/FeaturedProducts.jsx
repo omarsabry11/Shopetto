@@ -23,19 +23,13 @@ export default function FeaturedProducts({ products, title }) {
   const [wishListProducts, setWishListProducts] = useState([]);
   const [productIds, setProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState(products);
-  const [addToWishlistLoading, setAddToWishlistLoading] =
-    useState<boolean>(false);
+  const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-  const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState(false);
+  const [isShowingAllProducts, setIsShowingAllProducts] = useState(false);
 
-  const [selectedProductId, setSelectedProductId] = useState(
-    null
-  );
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-  const [selectedAddedProductId, setSelectedAddedProductId] = useState<
-    string | null
-  >(null);
+  const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);
   const queryClient = useQueryClient();
 
   const { addUserCart } = useContext(CartContext);
