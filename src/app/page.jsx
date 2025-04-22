@@ -11,7 +11,7 @@ export const metadata = {
   description: "Home page",
 };
 export default async function Home() {
-  const res = await fetch(`${process.env.API_URL}/products`, {
+  const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
     next: {
       revalidate: 1000,
     },
