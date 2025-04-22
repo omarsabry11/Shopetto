@@ -10,6 +10,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import TokenContextProvider from "./_core/_contexts/tokenContext";
 import WishlistContextProvider from "./_core/_contexts/wishlistContext";
+import { useEffect } from "react";
+
+const outfit = Outfit({
+  variable: "--font-lexend-sans",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -17,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const queryClient = new QueryClient();
-  // useEffect(() => {
-  //   import("flowbite");
-  // }, []);
+  useEffect(() => {
+    import("flowbite");
+  }, []);
 
   return (
     <html lang="en">

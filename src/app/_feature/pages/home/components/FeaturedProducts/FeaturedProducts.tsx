@@ -29,7 +29,7 @@ export default function FeaturedProducts({ products, title }) {
     }
   };
 
-  let settings = {
+  const settings = {
     dots: false,
     infinite: false,
     speed: 500,
