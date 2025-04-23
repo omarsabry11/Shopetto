@@ -46,9 +46,9 @@ export default function ProductCard({
             } `}
           >
             {addToWishlistLoading && selectedProductId === product._id ? (
-              <i className="fa fa-spin fa-spinner text-gray-400"></i>
+              <i className="fa fa-spin fa-spinner text-[#6A7282]"></i>
             ) : (
-              <i className="fa-solid fa-heart text-red-500 text-lg"></i>
+              <i className="fa-solid fa-heart text-[#FB2C36] text-lg"></i>
             )}
           </button>
         ) : (
@@ -63,9 +63,9 @@ export default function ProductCard({
             } `}
           >
             {addToWishlistLoading && selectedProductId === product._id ? (
-              <i className="fa fa-spin fa-spinner text-gray-400"></i>
+              <i className="fa fa-spin fa-spinner text-[#6A7282]"></i>
             ) : (
-              <i className="fa-regular fa-heart text-gray-400 text-lg"></i>
+              <i className="fa-regular fa-heart text-[#6A7282] text-lg"></i>
             )}
           </button>
         )}

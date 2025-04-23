@@ -1,12 +1,15 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-module.exports = {
+const nextConfig: import("next").NextConfig = {
   images: {
-    domains: ["ecommerce.routemisr.com"], // replace with your actual domain
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ecommerce.routemisr.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
+
 };
 
 export default nextConfig;

@@ -108,14 +108,14 @@ export default function AllProducts({ products }) {
 
   return (
     <>
-  
-
       <section className="my-10">
         <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-4xl font-[500]">Feature Products</h2>
+          <h2 className="text-4xl max-lg:text-3xl font-[500] flex-1">
+            Feature Products
+          </h2>
           <button
             onClick={() => handleChangeShowingProducts()}
-            className="underline cursor-pointer font-[500]"
+            className="underline cursor-pointer font-[500] max-lg:text-sm "
           >
             {isShowingAllProducts ? "Show less" : "See all products"}
           </button>

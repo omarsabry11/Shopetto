@@ -38,7 +38,7 @@ export default function Statistics() {
             className={`group box  border-gray-300 duration-500 hover:bg-main rounded-md p-7`}
           >
             <div className="w-16 h-16 mx-auto flex justify-center items-center rounded-full bg-gray-300 group-hover:bg-white duration-500">
-              <div className="w-[80%] h-[80%] flex justify-center items-center rounded-full bg-secondary group-hover:bg-main duration-300">
+              <div className="icon-box w-[80%] h-[80%] flex justify-center items-center rounded-full bg-secondary group-hover:bg-main duration-300">
                 <i className={`fa-solid ${item.icon} fa-xl text-white`}></i>
               </div>
             </div>

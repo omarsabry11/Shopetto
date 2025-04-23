@@ -8,7 +8,6 @@
   --main-color: #4e04fb;
 }
 body {
-  /* font-family: "Lexend", sans-serif; */
   font-family: "Outfit", sans-serif;
 }
 
@@ -82,4 +81,16 @@ body {
 }
 .statistics .box:hover > div {
   background: rgba(255, 255, 255, 0.4);
+}
+.box:hover
+{
+  background-color: var(--main-color);
+}
+.box:hover i
+{
+  color: white;
+}
+.box:hover .icon-box
+{
+  background-color: var(--main-color);
 }

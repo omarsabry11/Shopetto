@@ -174,19 +174,19 @@ export default function FeaturedProducts({ products, title }) {
      
       <section className="mb-10">
         <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-4xl font-[500]">{title}</h2>
+          <h2 className="text-4xl max-lg:text-3xl font-[500]">{title}</h2>
 
           {isSliderReady && (
             <div className="flex items-center gap-4">
               <button
                 onClick={prevSlide}
-                className="bg-main text-white w-12 h-12 rounded-full cursor-pointer"
+                className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
               >
                 <i className="fa-solid fa-arrow-left"></i>
               </button>
               <button
                 onClick={nextSlide}
-                className="bg-main text-white w-12 h-12 rounded-full cursor-pointer"
+                className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
               >
                 <i className="fa-solid fa-arrow-right"></i>
               </button>

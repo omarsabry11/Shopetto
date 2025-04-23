@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="text-white bg-secondary shadow px-5">
+    <footer className="text-white bg-secondary shadow md:px-5">
       <div className="p-10 container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-12 xl:gap-40 justify-center">
           <div className="lg:col-span-3 xl:col-span-2">

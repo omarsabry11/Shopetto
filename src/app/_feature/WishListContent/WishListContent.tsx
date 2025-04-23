@@ -98,7 +98,7 @@ export default function WishListContent() {
         <div>
           {isPageLoading ? (
             <div className="flex justify-center items-center h-lvh">
-              <div className="mb-[10rem]">
+              <div className="mb-[10rem] min-h-[calc(100vh-10rem)] flex flex-col justify-center">
                 <DotLoader bgColor="black"></DotLoader>
               </div>
             </div>
