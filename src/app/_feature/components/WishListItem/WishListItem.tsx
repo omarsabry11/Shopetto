@@ -116,7 +116,7 @@ function WishListItem({
 
             <button
               onClick={() => onRemoveWishList(product?._id)}
-              className=" text-sm w-[5rem] cursor-pointer text-red-500 duration-200"
+              className=" text-sm w-[5rem] cursor-pointer text-[#E7000B] duration-200"
             >
               {isDeletedLoading && selectedProductId === product?._id ? (
                 <DotLoader bgColor="#E7000B"></DotLoader>

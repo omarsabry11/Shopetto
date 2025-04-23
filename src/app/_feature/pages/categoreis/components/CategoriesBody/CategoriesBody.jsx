@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useRef,
 } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
@@ -39,6 +40,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);
   const queryClient = useQueryClient();
 
+  const sidebarRef = useRef(null);
   const { addUserCart } = useContext(CartContext);
 
   const getWishlist = useCallback(async () => {
@@ -52,10 +54,29 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
     }
   }, []);
 
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setShowMobileFilters(false);
+    }
+  };
   useEffect(() => {
     getWishlist();
     setAllProducts(products.slice(0, 5));
-  }, [getWishlist]);
+    if (showMobileFilters) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    if (showMobileFilters) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [getWishlist, showMobileFilters, setShowMobileFilters]);
 
   const handleAddToWishList = async (productId) => {
     try {
@@ -206,9 +227,12 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
 
         {/* Sidebar Filters */}
         <aside
+          ref={sidebarRef}
           className={`
           fixed top-0 left-0 h-full w-64 z-50 p-5 transform transition-transform duration-300 ease-in-out
-          ${showMobileFilters ? "translate-x-0" : "-translate-x-full"} 
+          ${
+            showMobileFilters ? "translate-x-0" : "-translate-x-full"
+          } overflow-y-auto
           lg:translate-x-0 lg:relative lg:block lg:w-1/4 bg-white
         `}
         >

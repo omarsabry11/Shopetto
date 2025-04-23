@@ -1,21 +1,39 @@
 "use client";
 import Link from "next/link";
 import { TokenContext } from "../../_contexts/tokenContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { token, setToken } = useContext(TokenContext);
 
   const router = useRouter();
+  const sidebarRef = useRef(null);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsSidebarOpen(false);
+    }
+  };
   useEffect(() => {
     if (localStorage.getItem("userToken")) {
       setToken(() => localStorage.getItem("userToken"));
     }
-  }, [token]);
+    if (isSidebarOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    if (isSidebarOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [token, isSidebarOpen, setIsSidebarOpen]);
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
@@ -133,10 +151,14 @@ export default function Navbar() {
               </div>
 
               {/* Mobile */}
+
               <aside
+                ref={sidebarRef}
                 id="logo-sidebar"
-                className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out
-                  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} `}
+                className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out 
+                  ${
+                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                  } overflow-y-auto`}
                 aria-label="Sidebar"
               >
                 <div className="h-full pb-4 overflow-y-auto bg-white">
