@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <ProtectRoute>
-      <section className="container mx-auto sm:px-10 px-5 my-16">
+      <section className="container mx-auto sm:px-10 px-5 my-16 min-h-[calc(100vh-10rem)]">
         <div className="flex items-center gap-8 max-lg:flex-col mb-20">
           <div className=" max-lg:w-full flex-1 ">
             <h2 className="main-title">Welcome to Shopetto</h2>

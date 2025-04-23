@@ -37,7 +37,7 @@ export default function RootLayout({
               <div className="flex flex-col min-h-screen">
                 <Navbar></Navbar>
                 <QueryClientProvider client={queryClient}>
-                  <div className="container mx-auto sm:px-10 px-5 flex-1">
+                  <div className="container mx-auto sm:px-10 px-5 flex-1 min-h-[calc(100vh-10rem)]">
                     {children}
                   </div>
                 </QueryClientProvider>

@@ -17,28 +17,24 @@ import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 import Image from "next/image";
 
 function CategoriesBody({ products, categories, categoryID, categoryName }) {
-  const [selectedCategoryID, setSelectedCategoryID] =
-    useState (categoryID);
+  const [selectedCategoryID, setSelectedCategoryID] = useState(categoryID);
   const [selectedCategoryName, setSelectedCategoryName] =
-    useState  (categoryName);
-  const [selectedSort, setSelectedSort] = useState ("default")
-  const [selectedPriceRange, setSelectedPriceRange] =useState(null)
-  const [showMobileFilters, setShowMobileFilters] = useState (false);
-  const [arrangementProducts, setArrangementProducts] =
-    useState ("grid2");
+    useState(categoryName);
+  const [selectedSort, setSelectedSort] = useState("default");
+  const [selectedPriceRange, setSelectedPriceRange] = useState(null);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [arrangementProducts, setArrangementProducts] = useState("grid2");
 
   const { getWishlistItems, addToUserWishlist, removeFromUserWishlist } =
     useContext(WishlistContext);
   const [wishListProducts, setWishListProducts] = useState([]);
   const [productIds, setProductIds] = useState([]);
   const [allProducts, setAllProducts] = useState(products);
-  const [addToWishlistLoading, setAddToWishlistLoading] =
-    useState(false);
+  const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-  const [isShowingAllProducts, setIsShowingAllProducts] =
-    useState(false);
+  const [isShowingAllProducts, setIsShowingAllProducts] = useState(false);
 
-  const [selectedProductId, setSelectedProductId] =useState(null)
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);
   const queryClient = useQueryClient();
@@ -192,7 +188,7 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
         transition={Bounce}
         className={"text-center"}
       />
-      <section className="mb-10">
+      <section className="my-10 h-full">
         <div className="h-[20rem] flex-1 max-lg:w-full bg-[url(/images/categories/shoppetoCover.jpg)] bg-cover bg-center  flex items-center">
           <h2 className="ps-10 text-3xl font-bold">{selectedCategoryName}</h2>
         </div>

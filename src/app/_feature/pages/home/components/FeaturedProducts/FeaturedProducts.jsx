@@ -87,16 +87,16 @@ export default function FeaturedProducts({ products, title }) {
     setSelectedAddedProductId(productId);
   }, []);
 
-  const handleChangeShowingProducts = () => {
-    setIsShowingAllProducts((prev) => !prev);
-    console.log(isShowingAllProducts);
+  // const handleChangeShowingProducts = () => {
+  //   setIsShowingAllProducts((prev) => !prev);
+  //   console.log(isShowingAllProducts);
 
-    if (!isShowingAllProducts) {
-      setAllProducts([...products]);
-    } else {
-      setAllProducts(products.slice(0, 5));
-    }
-  };
+  //   if (!isShowingAllProducts) {
+  //     setAllProducts([...products]);
+  //   } else {
+  //     setAllProducts(products.slice(0, 5));
+  //   }
+  // };
 
   const handleAddToCart = async (productId) => {
     try {
@@ -171,21 +171,7 @@ export default function FeaturedProducts({ products, title }) {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-        className={"text-center"}
-      />
-
+     
       <section className="mb-10">
         <div className="flex items-center justify-between mb-6 px-2">
           <h2 className="text-4xl font-[500]">{title}</h2>

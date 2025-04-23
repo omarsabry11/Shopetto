@@ -90,7 +90,7 @@ export default function ProductsTable() {
         ) : products?.length > 0 ? (
           <div>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-              <thead className="text-[1.05rem] text-gray-700 bg-gray-50 text-center dark:bg-gray-700 dark:text-gray-400">
+              <thead className="text-[1.05rem] text-gray-700 bg-gray-50 text-center">
                 <tr>
                   <th scope="col" className="px-16 py-3 font-semibold">
                     {" "}
@@ -122,7 +122,7 @@ export default function ProductsTable() {
                 {products?.map((product: Product) => (
                   <tr
                     key={product._id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    className="bg-white border-b d border-gray-200 hover:bg-gray-50 "
                   >
                     <td className="p-4">
                       {product?.product?.imageCover && (
@@ -135,10 +135,10 @@ export default function ProductsTable() {
                         ></Image>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-gray-900 dark:text-white text-lg">
+                    <td className="px-6 py-4 text-gray-900  text-lg">
                       {product?.product?.title}
                     </td>
-                    <td className="px-6 py-4 text-gray-900 dark:text-white text-xs">
+                    <td className="px-6 py-4 text-gray-900 text-xs">
                       <div className="flex items-center gap-2">
                         <div
                           className="w-5 h-5 bg-contain bg-no-repeat bg-center rounded-full"
@@ -206,7 +206,7 @@ export default function ProductsTable() {
                         </button>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-[1rem] text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 font-semibold text-[1rem] text-gray-900">
                       ${product?.price}
                     </td>
                     <td className="px-6 py-4">

@@ -43,7 +43,7 @@ export default async function CategoryDetails({ params }) {
 
   return (
     <ProtectRoute>
-      <section className="mt-5">
+      <section className="min-h-[calc(100vh-10rem)]">
         <CategoriesBody
           products={data}
           categories={categories}

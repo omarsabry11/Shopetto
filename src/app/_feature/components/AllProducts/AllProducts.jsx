@@ -37,7 +37,7 @@ export default function AllProducts({ products }) {
 
   useEffect(() => {
     getWishlist();
-    setAllProducts(products.slice(0, 5));
+    setAllProducts(products?.slice(0, 5));
   }, [getWishlist]);
 
   const handleAddToWishList = async (productId) => {
@@ -108,20 +108,7 @@ export default function AllProducts({ products }) {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-        className={"text-center"}
-      />
+  
 
       <section className="my-10">
         <div className="flex items-center justify-between mb-6 px-2">
@@ -135,7 +122,7 @@ export default function AllProducts({ products }) {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 py-5">
-          {allProducts.map((product) => (
+          {allProducts?.map((product) => (
             <ProductCard
               key={product._id}
               product={product}
