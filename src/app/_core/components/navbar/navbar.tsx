@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { TokenContext } from "../../_contexts/tokenContext";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
@@ -60,7 +60,6 @@ export default function Navbar() {
     },
     {
       id: 2,
-
       title: "About",
       link: "/about",
       icon: (
@@ -332,7 +331,7 @@ export default function Navbar() {
                 <ul className="flex items-center gap-6 text-[0.95rem] justify-center max-lg:hidden">
                   {appBarData.map((item) => (
                     <li key={item.id}>
-                      <Link href={`/${item.link}`}>{item.title}</Link>
+                      <Link href={`${item.link}`}>{item.title}</Link>
                     </li>
                   ))}
                 </ul>

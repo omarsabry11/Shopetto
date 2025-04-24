@@ -152,7 +152,7 @@ export default function FeaturedProducts({ products, title }) {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -171,7 +171,6 @@ export default function FeaturedProducts({ products, title }) {
 
   return (
     <>
-     
       <section className="mb-10">
         <div className="flex items-center justify-between mb-6 px-2">
           <h2 className="text-4xl max-lg:text-3xl font-[500]">{title}</h2>
@@ -218,12 +217,6 @@ export default function FeaturedProducts({ products, title }) {
             ))}
           </Slider>
         </div>
-
-        {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 gap-4 py-5">
-          {products.map((product) => (
-            <ProductCard product={product} key={product._id}></ProductCard>
-          ))}
-        </div> */}
       </section>
     </>
   );

@@ -1,5 +1,5 @@
 "use client";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 import Navbar from "./_core/components/navbar/navbar";
 import { Outfit } from "next/font/google";
@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 
 const outfit = Outfit({
-  variable: "--font-lexend-sans",
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -24,13 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const queryClient = new QueryClient();
-  useEffect(() => {
-    import("flowbite");
-  }, []);
+  // useEffect(() => {
+  //   import("flowbite");
+  // }, []);
 
   return (
-    <html lang="en">
-      <body className={``}>
+    <html lang="en" className={`${outfit.variable}`}>
+      <body className={`font-sans`}>
         <TokenContextProvider>
           <CartContextProvider>
             <WishlistContextProvider>

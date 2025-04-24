@@ -8,7 +8,7 @@ export const metadata = {
   description: "Categories page",
 };
 export default async function CategoryDetails({ params }) {
-  const categoryID = params.categoryDetails;
+  const { categoryID } = await params;
 
   const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
     next: {
@@ -38,8 +38,6 @@ export default async function CategoryDetails({ params }) {
     }
   );
   const categoryName = await categoryNameRes.json();
-
-  console.log("NAmeeeeee", categoryName);
 
   return (
     <ProtectRoute>

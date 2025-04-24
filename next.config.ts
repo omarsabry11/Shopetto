@@ -1,15 +1,13 @@
-const nextConfig: import("next").NextConfig = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "ecommerce.routemisr.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'ecommerce.routemisr.com',
+        pathname: '/**', // يسمح بجميع المسارات
       },
     ],
   },
-
 };
 
 export default nextConfig;

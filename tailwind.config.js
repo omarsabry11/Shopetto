@@ -5,7 +5,9 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js", 
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ['var(--font-outfit)', 'sans-serif'],
+    },
   },
   plugins: [
     // eslint-disable-next-line @typescript-eslint/no-require-imports

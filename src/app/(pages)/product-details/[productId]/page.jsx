@@ -5,14 +5,12 @@ import { Bounce, ToastContainer } from "react-toastify";
 import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 
 export default async function ProductDetails({ params }) {
-  if (!params.productId) return notFound();
-
-  console.log(params.productId);
-  
+  const { productId } = await params;
+  if (!productId) return notFound();
 
   try {
     const res = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/products/${params.productId}`,
+      `https://ecommerce.routemisr.com/api/v1/products/${productId}`,
       {
         next: { revalidate: 1000 },
       }
