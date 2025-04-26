@@ -5,9 +5,9 @@ import { Bounce, ToastContainer } from "react-toastify";
 import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 
 export default async function ProductDetails({ params }) {
-  const { productId } = await params;
+  const { productId } = params;
   console.log(productId);
-  
+
   if (!productId) return notFound();
 
   try {
