@@ -1,39 +1,43 @@
 "use client";
 import Link from "next/link";
 import { TokenContext } from "../../_contexts/tokenContext";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CategoryIcon from "@mui/icons-material/Category";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LogoutIcon from "@mui/icons-material/Logout";
+import SearchIcon from "@mui/icons-material/Search";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IconButton, TextField } from "@mui/material";
 
 export default function Navbar() {
   const { token, setToken } = useContext(TokenContext);
 
   const router = useRouter();
-  const sidebarRef = useRef(null);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const handleClickOutside = (event) => {
-    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      setIsSidebarOpen(false);
-    }
-  };
   useEffect(() => {
     if (localStorage.getItem("userToken")) {
       setToken(() => localStorage.getItem("userToken"));
     }
-    if (isSidebarOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-    if (isSidebarOpen) {
-      document.addEventListener("click", handleClickOutside);
-    } else {
-      document.removeEventListener("click", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [token, isSidebarOpen, setIsSidebarOpen]);
+  }, [token]);
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
@@ -46,87 +50,72 @@ export default function Navbar() {
       id: 1,
       title: "Home",
       link: "/",
-      icon: (
-        <svg
-          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 18"
-        >
-          <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-        </svg>
-      ),
+      icon: <HomeIcon></HomeIcon>,
     },
     {
       id: 2,
       title: "About",
       link: "/about",
-      icon: (
-        <svg
-          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
-        </svg>
-      ),
+      icon: <InfoIcon></InfoIcon>,
     },
     {
       id: 3,
 
       title: "Categories",
       link: "/categories/6439d2d167d9aa4ca970649f",
-      icon: (
-        <svg
-          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 18 18"
-        >
-          <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
-        </svg>
-      ),
+      icon: <CategoryIcon></CategoryIcon>,
     },
     {
       id: 4,
 
       title: "Cart",
       link: "/cart",
-      icon: (
-        <svg
-          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 18 20"
-        >
-          <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
-        </svg>
-      ),
+      icon: <ShoppingCartIcon></ShoppingCartIcon>,
     },
     {
       id: 5,
       title: "Wishlist",
       link: "/wishlist",
-      icon: (
-        <svg
-          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
-        </svg>
-      ),
+      icon: <FavoriteIcon></FavoriteIcon>,
     },
   ];
+
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {appBarData.map((item) => (
+          <ListItem key={item.id} disablePadding>
+            <Link href={item.link} passHref className="w-full ">
+              <ListItemButton className="">
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+        <ListItem disablePadding>
+          <Link href="/logout" passHref>
+            <ListItemButton>
+              <ListItemIcon>
+                <LogoutIcon></LogoutIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItemButton>
+          </Link>
+        </ListItem>
+      </List>
+      <Divider />
+    </Box>
+  );
 
   return (
     <>
@@ -134,164 +123,82 @@ export default function Navbar() {
         <div className="container mx-auto sm:px-10 px-5">
           <div>
             <div className="flex items-center justify-between max-lg:flex-wrap mb-8">
-              <div className="flex items-center gap-x-4 max-lg:mb-3">
+              <div className="flex items-center max-lg:mb-3">
                 <Link href={"/"} className="order-1">
                   <h2 className="text-3xl font-[500]">Shopetto</h2>
                 </Link>
                 {token && (
-                  <button
-                    title="Open sidebar"
-                    onClick={() => setIsSidebarOpen(true)}
-                    className="cursor-pointer lg:hidden"
-                  >
-                    <i className="fa-solid fa-bars text-2xl"></i>
-                  </button>
+                  <Box className="lg:hidden">
+                    <Button onClick={toggleDrawer(true)} sx={{ padding: 0 }}>
+                      {" "}
+                      <MenuIcon
+                        sx={{ color: "white", width: "2rem", height: "2rem" }}
+                      ></MenuIcon>
+                    </Button>
+                    <Drawer open={open} onClose={toggleDrawer(false)}>
+                      {DrawerList}
+                    </Drawer>
+                  </Box>
                 )}
               </div>
 
-              {/* Mobile */}
-
-              <aside
-                ref={sidebarRef}
-                id="logo-sidebar"
-                className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out 
-                  ${
-                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                  } overflow-y-auto`}
-                aria-label="Sidebar"
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: { xs: "100%", lg: "30rem" },
+                  mx: "auto",
+                  order: { xs: 3, lg: 2 },
+                }}
               >
-                <div className="h-full pb-4 overflow-y-auto bg-white">
-                  <div className="bg-main text-white  p-3 flex items-center justify-between">
-                    <h2 className="self-center font-semibold whitespace-nowrap  text-md flex items-center gap-x-2 ">
-                      <i className="fa-regular fa-user text-sm"></i>
-                      <span>Hello Dear</span>
-                    </h2>
-
-                    <button
-                      onClick={() => setIsSidebarOpen(false)}
-                      className="cursor-pointer"
-                    >
-                      <i className="fa-solid fa-xmark text-white text-lg"></i>
-                    </button>
-                  </div>
-
-                  <ul className="space-y-2 font-medium my-4">
-                    {appBarData.map((item) => (
-                      <li key={item.id}>
-                        <Link
-                          onClick={() => setIsSidebarOpen(false)}
-                          href={`${item.link}`}
-                          className="flex items-center py-2 px-3  text-[#101828] rounded-lg  hover:bg-[#F9FAFB]  group"
-                        >
-                          {item.icon}
-                          <span className="flex-1 ms-3 whitespace-nowrap">
-                            {item.title}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
-                      <button
-                        onClick={() => {
-                          handleLogout();
-                          setIsSidebarOpen(false);
-                        }}
-                        className="flex items-center py-2 px-3  text-[#101828] rounded-lg  hover:bg-[#F9FAFB]  group"
-                      >
-                        <svg
-                          className="shrink-0 w-5 h-5 text-[#6A7282] transition duration-75  group-hover:text-[#101828] "
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 16"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
-                          />
-                        </svg>
-                        <span className="flex-1 ms-3 whitespace-nowrap">
-                          Logout
-                        </span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </aside>
-
-              <form className="flex items-center max-lg:w-full lg:min-w-[30rem] mx-auto order-2 max-lg:order-3 ">
-                <label htmlFor="simple-search" className="sr-only">
-                  Search
-                </label>
-                <div className="relative w-full">
-                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"></div>
-                  <input
-                    type="text"
-                    id="simple-search"
-                    className="bg-[#F9FAFB] text-[#101828] text-sm block w-full p-3.5 focus:outline-none"
-                    placeholder="Search for anything..."
-                  />
-                </div>
-                <button
-                  onClick={(e) => e.preventDefault()}
+                <TextField
+                  id="simple-search"
+                  placeholder="Search for anything..."
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  InputProps={{
+                    sx: {
+                      backgroundColor: "#F9FAFB",
+                      color: "#101828",
+                      fontSize: "0.875rem",
+                      borderRadius: "0",
+                      py: 0.48,
+                      "& fieldset": {
+                        border: "none",
+                      },
+                    },
+                  }}
+                />
+                <IconButton
                   type="submit"
                   title="Search"
-                  className="p-4 ms-2 text-sm font-medium text-white bg-main focus:outline-none cursor-pointer"
+                  sx={{
+                    ml: 1,
+                    p: 1.3,
+                    borderRadius: "0",
+                    backgroundColor: "#4e04fb",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "#4e04fb",
+                    },
+                  }}
                 >
-                  <svg
-                    className="w-4 h-4 "
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                  <span className="sr-only">Search</span>
-                </button>
-              </form>
+                  <SearchIcon />
+                </IconButton>
+              </Box>
 
               <div className="flex items-center gap-x-3 order-3 max-lg:order-2 max-lg:mb-3">
                 {token && (
                   <Link href={"/wishlist"}>
-                    <svg
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                      role="img"
-                      focusable="false"
-                      viewBox="0 0 32 32"
-                      fill="white"
-                    >
-                      <path d="M22.736 6.4v0c1.792 0 3.44 1.12 4.128 2.768 0.8 1.92 0.112 4.144-1.856 6.112l-9.024 8.992-9.024-8.976c-1.984-1.984-2.64-4.144-1.824-6.080 0.688-1.68 2.352-2.8 4.144-2.8 1.504 0 3.040 0.752 4.448 2.16l2.256 2.256 2.256-2.256c1.44-1.424 2.992-2.176 4.496-2.176zM22.736 3.2c-2.176 0-4.544 0.912-6.752 3.104-2.192-2.176-4.544-3.088-6.704-3.088-6.368 0-11.040 7.904-4.576 14.336l11.28 11.248 11.28-11.248c6.496-6.448 1.856-14.352-4.528-14.352v0z"></path>
-                    </svg>
+                    <FavoriteBorderIcon></FavoriteBorderIcon>
                   </Link>
                 )}
                 {token && (
                   <Link href={"/cart"}>
-                    <svg
-                      width="24"
-                      height="24"
-                      aria-hidden="true"
-                      role="img"
-                      focusable="false"
-                      viewBox="0 0 32 32"
-                      fill="white"
-                      className="cursor-pointer"
-                    >
-                      <path d="M25.248 22.4l3.552-14.4h-18.528l-0.96-4.8h-6.112v3.2h3.488l3.2 16h15.36zM24.704 11.2l-1.968 8h-10.24l-1.6-8h13.808z"></path>
-                      <path d="M25.6 26.4c0 1.325-1.075 2.4-2.4 2.4s-2.4-1.075-2.4-2.4c0-1.325 1.075-2.4 2.4-2.4s2.4 1.075 2.4 2.4z"></path>
-                      <path d="M14.4 26.4c0 1.325-1.075 2.4-2.4 2.4s-2.4-1.075-2.4-2.4c0-1.325 1.075-2.4 2.4-2.4s2.4 1.075 2.4 2.4z"></path>
-                    </svg>
+                    <ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>
                   </Link>
                 )}
 
@@ -301,7 +208,7 @@ export default function Navbar() {
                     className="cursor-pointer"
                     onClick={handleLogout}
                   >
-                    <i className="fa-solid fa-right-from-bracket text-lg"></i>
+                    <LogoutIcon></LogoutIcon>
                   </button>
                 ) : (
                   <div className="flex gap-x-3 font-[500]">
@@ -312,18 +219,18 @@ export default function Navbar() {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="flex gap-x-4">
-                <a href="#">
-                  <i className="fa-brands fa-facebook"></i>
+              <div className="flex gap-x-3">
+                <a title="Facebook" href="#">
+                  <FacebookIcon fontSize="small"></FacebookIcon>
                 </a>
-                <a href="#">
-                  <i className="fa-brands fa-instagram"></i>
+                <a title="Facebook" href="#">
+                  <InstagramIcon fontSize="small"></InstagramIcon>
                 </a>
-                <a href="#">
-                  <i className="fa-brands fa-twitter"></i>
+                <a title="Facebook" href="#">
+                  <TwitterIcon fontSize="small"></TwitterIcon>
                 </a>
-                <a href="#">
-                  <i className="fa-brands fa-linkedin"></i>
+                <a title="Facebook" href="#">
+                  <LinkedInIcon fontSize="small"></LinkedInIcon>
                 </a>
               </div>
 

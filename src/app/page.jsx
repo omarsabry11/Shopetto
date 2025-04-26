@@ -44,10 +44,12 @@ export default async function Home() {
       <ProtectRoute>
         <section className="min-h-[calc(100vh-10rem)]">
           <Slider></Slider>
+
           <FeaturedProducts
             title={"Latest Products"}
             products={sortedDatesProducts}
           ></FeaturedProducts>
+
           <ShopAdvantages></ShopAdvantages>
           <AllProducts products={data}></AllProducts>
           <Statistics></Statistics>

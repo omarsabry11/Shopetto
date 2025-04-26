@@ -65,14 +65,14 @@ export default function Login() {
             action=""
             className="flex flex-col gap-y-5 mt-10 mb-5"
           >
-            <div className="flex flex-col flex-grow-1">
+            <div className="flex flex-col flex-1">
               <div className="relative ">
                 <input
                   value={formik.values.email}
                   type="email"
                   name="email"
                   id="floating_outlined3"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                   placeholder=""
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -86,7 +86,7 @@ export default function Login() {
               </div>
               {formik.errors.email && formik.touched.email && (
                 <div
-                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                   role="alert"
                 >
                   <svg
@@ -115,7 +115,7 @@ export default function Login() {
                   type="password"
                   name="password"
                   id="floating_outlined4"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                   placeholder=""
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -129,7 +129,7 @@ export default function Login() {
               </div>
               {formik.errors.password && formik.touched.password && (
                 <div
-                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                   role="alert"
                 >
                   <svg

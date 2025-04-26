@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import StarRateIcon from "@mui/icons-material/StarRate";
 
 export default function ProductItemDetails({ data }) {
   const { addUserCart } = useContext(CartContext);
@@ -52,15 +53,16 @@ export default function ProductItemDetails({ data }) {
             <div className="p-10">
               <Image
                 className="mx-auto p-1 "
-                src={data.imageCover}
+                src={data?.imageCover || ""}
                 height={500}
                 width={400}
-                alt={data.title}
+                alt={data?.title}
+                priority
               />
             </div>
 
             <div className="flex items-center justify-center flex-wrap gap-5 mt-5">
-              {data.images.slice(0, 4).map((image, index) => (
+              {data?.images.slice(0, 4).map((image, index) => (
                 <Image
                   className="border border-gray-300 p-1 cursor-pointer"
                   key={index}
@@ -75,8 +77,8 @@ export default function ProductItemDetails({ data }) {
 
           <div className="my-10 text-[#292929] flex-1">
             <span className="bg-[#FF311C] px-2 py-[0.25rem] rounded-[0.15rem] text-white text-[0.7rem] font-semibold mb-3 block w-fit">
-              {data.priceAfterDiscount && "- "}
-              {data.priceAfterDiscount
+              {data?.priceAfterDiscount && "- "}
+              {data?.priceAfterDiscount
                 ? parseInt(
                     ((data.price - data.priceAfterDiscount) / data.price) * 100
                   )
@@ -84,26 +86,38 @@ export default function ProductItemDetails({ data }) {
               %
             </span>
 
-            <h2 className="text-3xl font-[500] mb-3">{data.title}</h2>
+            <h2 className="text-3xl font-[500] mb-3">{data?.title}</h2>
 
             <div className="flex items-center gap-8">
               <p className="text-[0.875rem]">
-                <span className="text-[#7c818b]">in</span> {data.category.name}
+                <span className="text-[#7c818b]">in</span> {data?.category.name}
               </p>
               <span className="text-[#d8d9dc]">|</span>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
-                  <i className="fa-solid fa-star text-[0.6rem] text-[#FFA439]"></i>
+              <div className="flex items-center gap-1.5">
+                <div className="flex items-center ">
+                  <StarRateIcon
+                    sx={{ color: "#FFA439", fontSize: "16px" }}
+                  ></StarRateIcon>
+                  <StarRateIcon
+                    sx={{ color: "#FFA439", fontSize: "16px" }}
+                  ></StarRateIcon>
+                  <StarRateIcon
+                    sx={{ color: "#FFA439", fontSize: "16px" }}
+                  ></StarRateIcon>
+                  <StarRateIcon
+                    sx={{ color: "#FFA439", fontSize: "16px" }}
+                  ></StarRateIcon>
+                  <StarRateIcon
+                    sx={{ color: "#FFA439", fontSize: "16px" }}
+                  ></StarRateIcon>
+
+               
                 </div>
 
                 <p className="text-[#7c818b] text-sm">
-                  {data.ratingsAverage}{" "}
+                  {data?.ratingsAverage}{" "}
                   <span className="">
-                    ({data.reviews ? data.reviews.length : 0} Reviews)
+                    ({data?.reviews ? data?.reviews.length : 0} Reviews)
                   </span>
                 </p>
               </div>
@@ -112,20 +126,20 @@ export default function ProductItemDetails({ data }) {
             <div className="border-b-2 border-[#F5F7F9] py-4">
               <p className="text-[1.75rem] font-[500]">
                 $
-                {data.priceAfterDiscount
-                  ? data.priceAfterDiscount.toFixed(2)
-                  : data.price.toFixed(2)}
+                {data?.priceAfterDiscount
+                  ? data?.priceAfterDiscount.toFixed(2)
+                  : data?.price.toFixed(2)}
               </p>
 
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2 text-[0.875rem]">
                   <p className="text-[#1d2128] text-[0.875rem] line-through ">
-                    ${data.price.toFixed(2)}
+                    ${data?.price.toFixed(2)}
                   </p>
                   <p className="text-[#ff311c]">
                     Save: $
-                    {data.priceAfterDiscount
-                      ? data.price - data.priceAfterDiscount
+                    {data?.priceAfterDiscount
+                      ? data?.price - data?.priceAfterDiscount
                       : (0).toFixed(2)}
                   </p>
                 </div>
@@ -137,7 +151,7 @@ export default function ProductItemDetails({ data }) {
 
             <div className="my-6">
               <h3 className="text-2xl mb-3 font-semibold">Description:</h3>
-              <p className="text-[#7E7E7E] text-md ">{data.description}</p>
+              <p className="text-[#7E7E7E] text-md ">{data?.description}</p>
             </div>
 
             <div className="mb-6">

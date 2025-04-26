@@ -1,14 +1,14 @@
 "use client";
 
-import { CartContext } from "@/app/_core/_contexts/CartContext";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
-import { Product } from "@/app/_core/interfaces/Product";
-import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
-import { toast } from "react-toastify";
-
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import StarRateIcon from '@mui/icons-material/StarRate';
 // type Props = {
 //   product: Product;
 //   onAddToWishList?: () => void;
@@ -46,9 +46,12 @@ export default function ProductCard({
             } `}
           >
             {addToWishlistLoading && selectedProductId === product._id ? (
-              <i className="fa fa-spin fa-spinner text-[#6A7282]"></i>
+
+              <div className="w-5 h-5 border-4 border-gray-200 border-t-main rounded-full animate-spin mt-1"></div>
             ) : (
-              <i className="fa-solid fa-heart text-[#FB2C36] text-lg"></i>
+              <FavoriteIcon
+                sx={{ color: "#FB2C36", fontSize: "22px" }}
+              ></FavoriteIcon>
             )}
           </button>
         ) : (
@@ -63,9 +66,11 @@ export default function ProductCard({
             } `}
           >
             {addToWishlistLoading && selectedProductId === product._id ? (
-              <i className="fa fa-spin fa-spinner text-[#6A7282]"></i>
+              <div className="w-5 h-5 border-4 border-gray-200 border-t-main rounded-full animate-spin mt-1"></div>
             ) : (
-              <i className="fa-regular fa-heart text-[#6A7282] text-lg"></i>
+              <FavoriteBorderIcon
+                sx={{ color: "#6A7282", fontSize: "22px" }}
+              ></FavoriteBorderIcon>
             )}
           </button>
         )}
@@ -109,7 +114,7 @@ export default function ProductCard({
                 </p>
               </div>
               <div className="flex items-center gap-1 ">
-                <i className="fa-solid fa-star text-xs text-[#FFA439]" />
+                <StarRateIcon sx={{ color: "#FFA439", fontSize: "16px" }}></StarRateIcon>
                 <p className="text-[#7c818b] text-sm font-[500]">
                   {product.ratingsAverage}
                 </p>
@@ -140,14 +145,24 @@ export default function ProductCard({
             {addToCartLoading && selectedAddedProductId === product._id ? (
               <DotLoader></DotLoader>
             ) : (
-              "Add To Cart"
+              <span className="flex items-center gap-0.5">
+                <AddShoppingCartOutlinedIcon
+                  sx={{ width: "1.1rem", height: "1.1rem" }}
+                ></AddShoppingCartOutlinedIcon>{" "}
+                <span>Add to Cart</span>
+              </span>
             )}
           </button>
           <Link
             href={`/product-details/${product._id}`}
             className="border-main border-2 text-main hover:bg-[#E6E9F9] duration-300 w-full h-[2rem] flex items-center justify-center rounded-md cursor-pointer"
           >
-            View Details
+            <span className="flex items-center gap-0.5">
+              <InfoOutlinedIcon
+                sx={{ width: "1.1rem", height: "1.1rem" }}
+              ></InfoOutlinedIcon>{" "}
+              <span>View Details</span>
+            </span>
           </Link>
         </div>
       </div>

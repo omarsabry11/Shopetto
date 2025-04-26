@@ -12,7 +12,8 @@ import Slider from "react-slick";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useQueryClient } from "@tanstack/react-query";
-import { Product } from "@/app/_core/interfaces/Product";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export default function FeaturedProducts({ products, title }) {
   const sliderRef = useRef(null);
@@ -87,17 +88,6 @@ export default function FeaturedProducts({ products, title }) {
     setSelectedAddedProductId(productId);
   }, []);
 
-  // const handleChangeShowingProducts = () => {
-  //   setIsShowingAllProducts((prev) => !prev);
-  //   console.log(isShowingAllProducts);
-
-  //   if (!isShowingAllProducts) {
-  //     setAllProducts([...products]);
-  //   } else {
-  //     setAllProducts(products.slice(0, 5));
-  //   }
-  // };
-
   const handleAddToCart = async (productId) => {
     try {
       setAddToCartLoading(true);
@@ -171,53 +161,55 @@ export default function FeaturedProducts({ products, title }) {
 
   return (
     <>
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-4xl max-lg:text-3xl font-[500]">{title}</h2>
+     
+        <section className="my-10">
+          <div className="flex items-center justify-between mb-6 px-2">
+            <h2 className="text-4xl max-lg:text-3xl font-[500]">{title}</h2>
 
-          {isSliderReady && (
-            <div className="flex items-center gap-4">
-              <button
-                onClick={prevSlide}
-                className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
-              >
-                <i className="fa-solid fa-arrow-left"></i>
-              </button>
-              <button
-                onClick={nextSlide}
-                className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
-              >
-                <i className="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div>
-          <Slider {...settings} ref={sliderRef}>
-            {products.map((product) => (
-              <div key={product._id} className="p-2">
-                <ProductCard
-                  key={product._id}
-                  product={product}
-                  onAddToWishList={handleAddToWishList}
-                  productIds={productIds}
-                  addToWishlistLoading={addToWishlistLoading}
-                  handleChangeSelectedProduct={handleChangeSelectedProduct}
-                  selectedProductId={selectedProductId}
-                  onRemoveFromWishList={handleRemoveFromWishList}
-                  onAddToCart={handleAddToCart}
-                  addToCartLoading={addToCartLoading}
-                  handleChangeSelectedAddedProduct={
-                    handleChangeSelectedAddedProduct
-                  }
-                  selectedAddedProductId={selectedAddedProductId}
-                ></ProductCard>
+            {isSliderReady && (
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={prevSlide}
+                  className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
+                >
+                  <ArrowBackIcon></ArrowBackIcon>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="bg-main text-white w-12 h-12 max-lg:w-11 max-lg:h-11 rounded-full cursor-pointer"
+                >
+                  <ArrowForwardIcon></ArrowForwardIcon>
+                </button>
               </div>
-            ))}
-          </Slider>
-        </div>
-      </section>
+            )}
+          </div>
+
+          <div>
+            <Slider {...settings} ref={sliderRef}>
+              {products?.map((product) => (
+                <div key={product._id} className="p-2">
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    onAddToWishList={handleAddToWishList}
+                    productIds={productIds}
+                    addToWishlistLoading={addToWishlistLoading}
+                    handleChangeSelectedProduct={handleChangeSelectedProduct}
+                    selectedProductId={selectedProductId}
+                    onRemoveFromWishList={handleRemoveFromWishList}
+                    onAddToCart={handleAddToCart}
+                    addToCartLoading={addToCartLoading}
+                    handleChangeSelectedAddedProduct={
+                      handleChangeSelectedAddedProduct
+                    }
+                    selectedAddedProductId={selectedAddedProductId}
+                  ></ProductCard>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </section>
+ 
     </>
   );
 }

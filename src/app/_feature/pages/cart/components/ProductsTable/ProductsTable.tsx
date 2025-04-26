@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 import { Product } from "@/app/_core/interfaces/Product";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function ProductsTable() {
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
@@ -33,10 +34,6 @@ export default function ProductsTable() {
   const { data, isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: getCart,
-    // initialData: () => {
-    //   const cachedData = queryClient.getQueryData(["cart"]);
-    //   return cachedData;
-    // },
   });
 
   useEffect(() => {
@@ -224,19 +221,9 @@ export default function ProductsTable() {
                           }`}
                           disabled={deletingProductLoading}
                         >
-                          <svg
-                            width="22"
-                            height="22"
-                            aria-hidden="true"
-                            role="img"
-                            focusable="false"
-                            viewBox="0 0 32 32"
-                            fill="#E7000B"
-                          >
-                            <path d="M23.84 9.6h-15.68c-0.96 0-1.6 0.8-1.6 1.76l1.28 14.56c0.16 1.6 1.6 2.88 3.2 2.88h10.080c1.6 0 3.040-1.28 3.2-2.88l1.28-14.56c0-0.96-0.8-1.76-1.76-1.76zM21.12 25.6h-10.24l-0.96-12.8h12.32l-1.12 12.8z"></path>
-                            <path d="M24 4.8h-4.8c0-0.96-0.64-1.6-1.6-1.6h-3.2c-0.96 0-1.6 0.64-1.6 1.6h-4.8c-1.76 0-3.2 1.44-3.2 3.2h22.4c0-1.76-1.44-3.2-3.2-3.2z"></path>
-                            <path d="M14.4 16h3.2v6.4h-3.2v-6.4z"></path>
-                          </svg>
+                          <DeleteForeverIcon
+                            sx={{ color: "#E7000B" }}
+                          ></DeleteForeverIcon>
                         </button>
                       )}
                     </td>

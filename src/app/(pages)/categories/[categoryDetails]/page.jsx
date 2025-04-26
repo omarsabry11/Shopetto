@@ -1,6 +1,5 @@
 import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
 import CategoriesBody from "@/app/_feature/pages/categoreis/components/CategoriesBody/CategoriesBody";
-import { Metadata } from "next";
 import React from "react";
 
 export const metadata = {

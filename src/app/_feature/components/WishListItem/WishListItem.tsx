@@ -1,9 +1,8 @@
 import Image from "next/image";
-import React, { useContext, useState } from "react";
-import { CartContext } from "@/app/_core/_contexts/CartContext";
-import { toast } from "react-toastify";
+import React from "react";
 import Link from "next/link";
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 function WishListItem({
   product,
@@ -121,8 +120,10 @@ function WishListItem({
               {isDeletedLoading && selectedProductId === product?._id ? (
                 <DotLoader bgColor="#E7000B"></DotLoader>
               ) : (
-                <div className="flex items-center gap-1.5">
-                  <i className="fa-solid fa-trash"></i>
+                <div className="flex items-center gap-0.5">
+                  <DeleteForeverIcon
+                    sx={{ width: 20, height: 20 }}
+                  ></DeleteForeverIcon>
                   <span className="font-[500]">Remove</span>
                 </div>
               )}

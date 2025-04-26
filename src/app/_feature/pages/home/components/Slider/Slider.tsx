@@ -1,5 +1,6 @@
 import { Category } from "@/app/_core/interfaces/Category";
 import Link from "next/link";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
 export default async function Slider() {
   const res = await fetch(`https://ecommerce.routemisr.com/api/v1/categories`, {
@@ -8,22 +9,23 @@ export default async function Slider() {
     },
   });
   const { data } = await res.json();
- 
-  
 
   return (
-    <section className="mt-5 mb-15">
+    <section className="mt-5 mb-20">
       <div className="flex gap-5 items-start">
         <div className="w-1/4 max-lg:hidden border border-[#E5E7EB] pt-4 rounded-lg">
-          <button className="ps-4 border-b border-[#E5E7EB] w-full text-left pb-2">
-            <p>
+          <button className="ps-3 border-b border-[#E5E7EB] w-full text-left pb-2">
+            <p className="flex items-center gap-1.5">
               {" "}
-              <i className="fa-solid fa-list me-1"></i> All Categories
+              <FormatListBulletedIcon
+                sx={{ width: "1.2rem", height: "1.2rem" }}
+              />{" "}
+              <span>All Categories</span>
             </p>
           </button>
 
           <ul>
-            {data.map((category:Category, index:number) => (
+            {data.map((category: Category, index: number) => (
               <li key={category._id}>
                 <Link href={`/categories/${category._id}`}>
                   <div

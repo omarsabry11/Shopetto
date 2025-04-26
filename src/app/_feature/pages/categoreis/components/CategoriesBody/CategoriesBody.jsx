@@ -16,6 +16,31 @@ import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
 import Image from "next/image";
+import {
+  Box,
+  Drawer,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CategoryIcon from "@mui/icons-material/Category";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Link from "next/link";
+import TuneIcon from "@mui/icons-material/Tune";
 
 function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const [selectedCategoryID, setSelectedCategoryID] = useState(categoryID);
@@ -41,6 +66,8 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const queryClient = useQueryClient();
 
   const sidebarRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
   const { addUserCart } = useContext(CartContext);
 
   const getWishlist = useCallback(async () => {
@@ -193,6 +220,94 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
   const handleChangeArrangement = useCallback((arrangement) => {
     setArrangementProducts(arrangement);
   }, []);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        <Box sx={{ px: 1, pb: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              py: 2,
+              borderBottom: "1px solid #EEF1F5",
+              mb: 2,
+            }}
+          >
+            <TuneIcon sx={{ color: "#7c818b" }} />
+            <Typography
+              className=""
+              fontWeight={600}
+              fontSize="1.125rem"
+              color="#7c818b"
+            >
+              Filter
+            </Typography>
+          </Box>
+
+          <List sx={{ borderBottom: "1px solid #ccc", pb: 2 }}>
+            {categories.map((category) => (
+              <ListItem key={category._id} disablePadding>
+                <Button
+                  fullWidth
+                  onClick={() =>
+                    handleChangeCategory(category._id, category.name)
+                  }
+                  sx={{
+                    justifyContent: "flex-start",
+                    textTransform: "none",
+                    fontWeight: selectedCategoryID === category._id ? 600 : 400,
+                    backgroundColor:
+                      selectedCategoryID === category._id
+                        ? "#4e04fb"
+                        : "transparent",
+                    color:
+                      selectedCategoryID === category._id ? "white" : "inherit",
+                    borderRadius: 1,
+                  }}
+                >
+                  {category.name}
+                </Button>
+              </ListItem>
+            ))}
+          </List>
+          <Box sx={{ pt: 3 }}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend" sx={{ fontWeight: 600, mb: 2 }}>
+                Price:
+              </FormLabel>
+              <RadioGroup
+                name="price"
+                value={selectedPriceRange}
+                onChange={(e) => handleChangePriceRange(e.target.value)}
+              >
+                <FormControlLabel
+                  value="firstClass"
+                  control={<Radio />}
+                  label="0 - $500"
+                />
+                <FormControlLabel
+                  value="secondClass"
+                  control={<Radio />}
+                  label="$500 - $1000"
+                />
+                <FormControlLabel
+                  value="thirdClass"
+                  control={<Radio />}
+                  label="$1000+"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Box>
+        </Box>
+      </List>
+      <Divider />
+    </Box>
+  );
   return (
     <>
       <ToastContainer
@@ -217,12 +332,30 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
       <div className="flex flex-col lg:flex-row">
         {/* ☰ Mobile filter button */}
         <div className="lg:hidden p-4">
-          <button
+          <Button
             onClick={() => setShowMobileFilters(true)}
             className="bg-main text-white px-4 py-2 rounded-md"
-          >
-            ☰ Filter
-          </button>
+          ></Button>
+
+          <Box className="lg:hidden">
+            <Button
+              className="main-bg"
+              onClick={toggleDrawer(true)}
+              sx={{
+                padding: 0,
+                backgroundColor: "#4e04fb",
+                color: "white",
+                px: 1,
+                py: 0.5,
+              }}
+            >
+              {" "}
+              ☰ Filter
+            </Button>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+              {DrawerList}
+            </Drawer>
+          </Box>
         </div>
 
         {/* Sidebar Filters */}

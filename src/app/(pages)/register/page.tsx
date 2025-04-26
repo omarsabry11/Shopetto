@@ -75,7 +75,7 @@ export default function Register() {
   return (
     <section className="min-h-[calc(100vh-10rem)] my-10 flex items-center justify-center xl:px-10">
       <main className="flex gap-20 w-full">
-        <div className="mt-10 flex-grow-1">
+        <div className="mt-10 flex-1">
           <h2 className="text-4xl font-[500] font-poppins mb-4">Sign up</h2>
           <p className="text-[#313131]">
             Let’s get you all st up so you can access your personal account.
@@ -86,13 +86,13 @@ export default function Register() {
             className="flex flex-col gap-y-5 mt-10 mb-5"
           >
             <div className="flex gap-5 flex-wrap">
-              <div className="flex flex-col flex-grow-1">
+              <div className="flex flex-col flex-1">
                 <div className="relative ">
                   <input
                     type="text"
                     name="name"
                     id="name"
-                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder=""
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -107,7 +107,7 @@ export default function Register() {
 
                 {formik.errors.name && formik.touched.name && (
                   <div
-                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                     role="alert"
                   >
                     <svg
@@ -130,16 +130,18 @@ export default function Register() {
                   </div>
                 )}
               </div>
+
+
             </div>
 
             <div className="flex gap-5 flex-wrap">
-              <div className="flex flex-col flex-grow-1">
+              <div className="flex flex-col flex-1">
                 <div className="relative ">
                   <input
                     type="email"
                     name="email"
                     id="email"
-                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder=""
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -153,7 +155,7 @@ export default function Register() {
                 </div>
                 {formik.errors.email && formik.touched.email && (
                   <div
-                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                     role="alert"
                   >
                     <svg
@@ -177,13 +179,13 @@ export default function Register() {
                 )}
               </div>
 
-              <div className="flex flex-col flex-grow-1">
+              <div className="flex flex-col flex-1">
                 <div className="relative">
                   <input
                     type="tel"
                     name="phone"
                     id="phone"
-                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                     placeholder=""
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -197,7 +199,7 @@ export default function Register() {
                 </div>
                 {formik.errors.phone && formik.touched.phone && (
                   <div
-                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                     role="alert"
                   >
                     <svg
@@ -222,13 +224,13 @@ export default function Register() {
               </div>
             </div>
 
-            <div className="flex flex-col flex-grow-1">
+            <div className="flex flex-col flex-1">
               <div className="relative">
                 <input
                   type="password"
                   name="password"
                   id="floating_outlined4"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                   placeholder=""
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -242,7 +244,7 @@ export default function Register() {
               </div>
               {formik.errors.password && formik.touched.password && (
                 <div
-                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                  className="flex items-center p-3 mt-3 text-sm text-red-800 rounded-lg bg-red-50"
                   role="alert"
                 >
                   <svg
@@ -266,13 +268,13 @@ export default function Register() {
               )}
             </div>
 
-            <div className="flex flex-col flex-grow-1">
+            <div className="flex flex-col flex-1">
               <div className="relative">
                 <input
                   type="password"
                   name="rePassword"
                   id="floating_outlined5"
-                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border-1 border-[#79747E] appearance-none focus:outline-none focus:ring-0 focus:border-main peer"
+                  className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-black bg-transparent rounded-lg border border-[#79747E] appearance-none focus:outline-none focus:ring-0  peer"
                   placeholder=""
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
