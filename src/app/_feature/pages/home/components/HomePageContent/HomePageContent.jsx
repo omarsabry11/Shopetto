@@ -4,7 +4,7 @@ import ShopAdvantages from "../ShopAdvantages/ShopAdvantages";
 import AllProducts from "@/app/_feature/components/AllProducts/AllProducts";
 import Statistics from "../Statistics/Statistics";
 import FeaturedProducts from "../FeaturedProducts/FeaturedProducts";
-import Slider from "../Slider/Slider";
+import Slider from "../HeroSection/HeroSection";
 
 
 export default function HomePageContent({ products }) {

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+
 import {
   FaTags,
   FaLayerGroup,
@@ -57,12 +58,16 @@ export default function About() {
           <h2 className="main-title">Welcome to Shopetto</h2>
           <p className="text-lg text-[#7E7E7E] mb-5">
             Shopetto brings you the best in fashion, electronics, home
-            essentials, and more — all in one place. Discover unbeatable prices
-            and fast delivery.
+            essentials, and more — all in one place. Discover unbeatable prices,
+            fast delivery, and a wide range of top-quality products to suit
+            every taste and need.
           </p>
           <p className="text-lg text-[#7E7E7E] mb-8">
             We believe shopping should be simple, fun, and rewarding. That’s why
-            we offer quality products, exclusive deals, and a secure platform.
+            we offer exclusive deals, secure transactions, and a hassle-free
+            return policy, ensuring you shop with confidence. Whether you’re
+            upgrading your wardrobe, refreshing your home, or exploring the
+            latest tech, we’ve got you covered.
           </p>
         </div>
         <div className="w-[45%] max-xl:hidden">

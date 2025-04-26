@@ -10,8 +10,6 @@ import React, {
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
 import SecondProductCard from "@/app/_shared/components/SecondProductCard/SecondProductCard";
-import { Product } from "@/app/_core/interfaces/Product";
-import { Category } from "@/app/_core/interfaces/Category";
 import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { WishlistContext } from "@/app/_core/_contexts/wishlistContext";
@@ -30,19 +28,14 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CategoryIcon from "@mui/icons-material/Category";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LogoutIcon from "@mui/icons-material/Logout";
-import Link from "next/link";
 import TuneIcon from "@mui/icons-material/Tune";
 
-function CategoriesBody({ products, categories, categoryID, categoryName }) {
+export default function CategoriesContent({
+  products,
+  categories,
+  categoryID,
+  categoryName,
+}) {
   const [selectedCategoryID, setSelectedCategoryID] = useState(categoryID);
   const [selectedCategoryName, setSelectedCategoryName] =
     useState(categoryName);
@@ -629,5 +622,3 @@ function CategoriesBody({ products, categories, categoryID, categoryName }) {
     </>
   );
 }
-
-export default CategoriesBody;

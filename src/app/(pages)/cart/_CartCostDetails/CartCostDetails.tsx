@@ -66,7 +66,7 @@ export default function CartCostDetails({
                 />
                 <label
                   htmlFor="bordered-radio-1"
-                  className="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+                  className="w-full ms-2 text-sm font-medium text-gray-900 cursor-pointer"
                 >
                   Cash on delivery
                 </label>
@@ -82,7 +82,7 @@ export default function CartCostDetails({
                 />
                 <label
                   htmlFor="bordered-radio-2"
-                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900cursor-pointer"
                 >
                   Online payment
                 </label>

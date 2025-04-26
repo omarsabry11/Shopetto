@@ -14,6 +14,7 @@ export default function Cart() {
         <section className="my-10">
           <CartHeader isCartPage={true}></CartHeader>
           <CartBody></CartBody>
+          
         </section>
       </ProtectRoute>
     </>

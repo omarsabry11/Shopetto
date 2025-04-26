@@ -1,6 +1,6 @@
 "use client";
 import ProductCard from "@/app/_shared/components/ProductCard/ProductCard";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import {  toast } from "react-toastify";
 import React, {
   useCallback,
   useContext,
@@ -14,6 +14,8 @@ import { CartContext } from "@/app/_core/_contexts/CartContext";
 import { useQueryClient } from "@tanstack/react-query";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function FeaturedProducts({ products, title }) {
   const sliderRef = useRef(null);

@@ -1,13 +1,20 @@
 import { Metadata } from "next";
-import Slider from "./_feature/pages/home/components/Slider/Slider";
-import ShopAdvantages from "./_feature/pages/home/components/ShopAdvantages/ShopAdvantages";
-import FeaturedProducts from "./_feature/pages/home/components/FeaturedProducts/FeaturedProducts";
-import AllProducts from "./_feature/components/AllProducts/AllProducts";
-import Statistics from "./_feature/pages/home/components/Statistics/Statistics";
+import HeroSection from "./_feature/pages/home/components/HeroSection/HeroSection";
 import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 import { Bounce, ToastContainer } from "react-toastify";
-import HomePageContent from "./_feature/pages/home/components/HomePageContent/HomePageContent";
-
+import dynamic from "next/dynamic";
+const FeaturedProducts = dynamic(() =>
+  import("./_feature/pages/home/components/FeaturedProducts/FeaturedProducts")
+);
+const AllProducts = dynamic(() =>
+  import("./_feature/components/AllProducts/AllProducts")
+);
+const ShopAdvantages = dynamic(() =>
+  import("./_feature/pages/home/components/ShopAdvantages/ShopAdvantages")
+);
+const Statistics = dynamic(() =>
+  import("./_feature/pages/home/components/Statistics/Statistics")
+);
 export const metadata = {
   title: "Home",
   description: "Home page",
@@ -42,19 +49,14 @@ export default async function Home() {
       />
 
       <ProtectRoute>
-        <section className="min-h-[calc(100vh-10rem)]">
-          <Slider></Slider>
-
-          <FeaturedProducts
-            title={"Latest Products"}
-            products={sortedDatesProducts}
-          ></FeaturedProducts>
-
-          <ShopAdvantages></ShopAdvantages>
-          <AllProducts products={data}></AllProducts>
-          <Statistics></Statistics>
-          {/* <HomePageContent products={data}></HomePageContent> */}
-        </section>
+        <HeroSection></HeroSection>
+        <FeaturedProducts
+          title={"Latest Products"}
+          products={sortedDatesProducts}
+        ></FeaturedProducts>
+        <ShopAdvantages></ShopAdvantages>
+        <AllProducts products={data}></AllProducts>
+        <Statistics></Statistics>
       </ProtectRoute>
     </>
   );

@@ -154,7 +154,7 @@ export default function Login() {
 
             <div className="flex justify-between">
               <div className="ms-1 flex items-center gap-x-2">
-                <input type="checkbox" />
+                <input title="Remember me" type="checkbox" />
                 <p>Remember me</p>
               </div>
               <Link href={"/forgot-password"} className="text-red-700">

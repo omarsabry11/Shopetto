@@ -40,9 +40,9 @@ export default function Navbar() {
   }, [token]);
 
   const handleLogout = () => {
+    router.push("/login");
     localStorage.removeItem("userToken");
     setToken(null);
-    router.push("/login");
   };
 
   const appBarData = [

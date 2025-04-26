@@ -68,7 +68,9 @@ export default function WishListContent() {
         getWishList();
         console.log(res);
         setIsDeletedLoading(false);
-        toast.success(res?.data?.message || "Product removed from wishlist");
+        if (!isAddedToCart) {
+          toast.success(res?.data?.message || "Product removed from wishlist");
+        }
       });
   }, []);
 

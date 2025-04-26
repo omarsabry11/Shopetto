@@ -5,8 +5,6 @@ import { Outfit } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CartContextProvider from "./_core/_contexts/CartContext";
 import Footer from "./_core/components/Footer/Footer";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import TokenContextProvider from "./_core/_contexts/tokenContext";
 import WishlistContextProvider from "./_core/_contexts/wishlistContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
