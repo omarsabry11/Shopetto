@@ -2,7 +2,7 @@ import FeaturedProducts from "@/app/_feature/pages/home/components/FeaturedProdu
 import React from "react";
 
 export default async function RelatedProducts({ productCategory }) {
-  const res = await fetch(`${process.env.API_URL}/products`);
+  const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`);
   const { data } = await res.json();
 
   const filteredProducts = data.filter(

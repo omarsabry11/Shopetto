@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import ProductItemDetails from "../../../_feature/pages/product-details/ProductItemDetails/ProductItemDetails";
-import RelatedProducts from "../../../_feature/pages/product-details/components/RelatedProducts/RelatedProducts";
-import { Bounce, ToastContainer } from "react-toastify";
-import ProtectRoute from "@/app/_core/components/ProtectRoute/ProtectRoute";
+
+import ProductDetailsClient from "../../../_feature/pages/product-details/components/ProductDetailsClient/ProductDetailsClient";
+import RelatedProducts from "@/app/_feature/pages/product-details/components/RelatedProducts/RelatedProducts";
 
 export default async function ProductDetails({ params }) {
   const { productId } = params;
@@ -26,21 +25,7 @@ export default async function ProductDetails({ params }) {
 
     return (
       <>
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition={Bounce}
-          className="text-center"
-        />
-        <ProductItemDetails data={data} />
+        <ProductDetailsClient data={data} />
         <RelatedProducts productCategory={data?.category?.name} />
       </>
     );
