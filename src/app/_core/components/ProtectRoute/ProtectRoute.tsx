@@ -9,10 +9,11 @@ export default function ProtectRoute({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const [isBot, setIsBot] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
+
     const bots = [
       "googlebot",
       "bingbot",
@@ -23,15 +24,16 @@ export default function ProtectRoute({
     ];
 
     const detectedBot = bots.some((bot) => userAgent.includes(bot));
-    setIsBot(detectedBot);
 
-
-    const token = localStorage.getItem("token");
-    if (!detectedBot && !token) {
+    const token = localStorage.getItem("userToken");
+    if (detectedBot || token) {
+      setIsLoggedIn(true);
+    } else {
       router.push("/login");
     }
   }, [router]);
 
+  if (!isLoggedIn) return null;
 
-  return <>{children}</>;
+  return children;
 }
