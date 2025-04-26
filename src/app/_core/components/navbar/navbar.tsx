@@ -103,7 +103,7 @@ export default function Navbar() {
           </ListItem>
         ))}
         <ListItem disablePadding>
-          <Link href="/logout" passHref>
+          <Link href="/login" passHref>
             <ListItemButton>
               <ListItemIcon>
                 <LogoutIcon></LogoutIcon>
@@ -129,7 +129,15 @@ export default function Navbar() {
                 </Link>
                 {token && (
                   <Box className="lg:hidden">
-                    <Button onClick={toggleDrawer(true)} sx={{ padding: 0 }}>
+                    <Button
+                      onClick={toggleDrawer(true)}
+                      sx={{
+                        padding: 0,
+                        minWidth: "auto",
+                        width: "fit-content",
+                        mr: 1,
+                      }}
+                    >
                       {" "}
                       <MenuIcon
                         sx={{ color: "white", width: "2rem", height: "2rem" }}

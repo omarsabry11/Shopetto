@@ -1,22 +1,37 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function ProtectRoute({ children }) {
+export default function ProtectRoute({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isBot, setIsBot] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("userToken");
-    if (!token) {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const bots = [
+      "googlebot",
+      "bingbot",
+      "slurp",
+      "duckduckbot",
+      "baiduspider",
+      "yandexbot",
+    ];
+
+    const detectedBot = bots.some((bot) => userAgent.includes(bot));
+    setIsBot(detectedBot);
+
+
+    const token = localStorage.getItem("token");
+    if (!detectedBot && !token) {
       router.push("/login");
-    } else {
-        setIsLoggedIn(true);
     }
   }, [router]);
 
-  if (!isLoggedIn) return null;
 
-  return children;
+  return <>{children}</>;
 }
