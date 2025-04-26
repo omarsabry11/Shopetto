@@ -25,7 +25,7 @@ export default async function ProductDetails({ params }) {
     if (!data) return notFound();
 
     return (
-      <ProtectRoute>
+      <>
         <ToastContainer
           position="top-right"
           autoClose={2000}
@@ -42,7 +42,7 @@ export default async function ProductDetails({ params }) {
         />
         <ProductItemDetails data={data} />
         <RelatedProducts productCategory={data?.category?.name} />
-      </ProtectRoute>
+      </>
     );
   } catch (error) {
     console.error("Error fetching product details:", error);
