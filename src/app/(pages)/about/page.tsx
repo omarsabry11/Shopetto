@@ -12,8 +12,20 @@ import {
 } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "About Shopetto - Your trusted e-commerce partner",
+  title: "Shopetto - Your Trusted E-commerce Partner",
+  description:
+    "Shopetto brings you the best in fashion, electronics, home essentials, and more — all in one place.",
+  robots: "index, follow",
+  openGraph: {
+    title: "Shopetto",
+    description: "Your trusted e-commerce partner",
+    siteName: "Shopetto",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shopetto",
+    description: "Your trusted e-commerce partner",
+  },
 };
 
 const iconsClasses = "text-[2.5rem] text-[#1B1A41] mx-auto";
@@ -76,7 +88,6 @@ export default function About() {
             alt="About Shopetto"
             width={500}
             height={500}
-    
           />
         </div>
       </div>
