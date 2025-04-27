@@ -72,11 +72,11 @@ export default function About() {
         </div>
         <div className="w-[45%] max-xl:hidden">
           <Image
-            src="/images/about/Ecommerce2.svg"
+            src="/images/about/Ecommerce2.webp"
             alt="About Shopetto"
             width={500}
             height={500}
-            priority
+    
           />
         </div>
       </div>
