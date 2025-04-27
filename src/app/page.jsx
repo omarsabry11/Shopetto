@@ -3,6 +3,7 @@ import HeroSection from "./_feature/pages/home/components/HeroSection/HeroSectio
 import ProtectRoute from "./_core/components/ProtectRoute/ProtectRoute";
 import { Bounce, ToastContainer } from "react-toastify";
 import dynamic from "next/dynamic";
+import ToastContainerClient from "./_core/components/ToastContainerClient/ToastContainerClient";
 const FeaturedProducts = dynamic(() =>
   import("./_feature/pages/home/components/FeaturedProducts/FeaturedProducts")
 );
@@ -20,42 +21,38 @@ export const metadata = {
   description: "Home page",
 };
 export default async function Home() {
-  const res = await fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
-    next: {
-      revalidate: 1000,
-    },
-  });
-  const { data } = await res.json();
+  const [productsRes, categoriesRes] = await Promise.all([
+    fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
+      next: { revalidate: 1000 },
+      cache: "force-cache",
+    }),
+    fetch(`https://ecommerce.routemisr.com/api/v1/categories`, {
+      next: { revalidate: 1000 },
+      cache: "force-cache",
+    }),
+  ]);
 
-  const sortedDatesProducts = [...data]
+  const [productsData, categoriesData] = await Promise.all([
+    productsRes.json(),
+    categoriesRes.json(),
+  ]);
+
+  const sortedDatesProducts = [...productsData.data]
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(5, 20);
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-        className={"text-center"}
-      />
+      <ToastContainerClient />
 
       <ProtectRoute>
-        <HeroSection></HeroSection>
+        <HeroSection data={categoriesData.data}></HeroSection>
         <FeaturedProducts
           title={"Latest Products"}
           products={sortedDatesProducts}
         ></FeaturedProducts>
         <ShopAdvantages></ShopAdvantages>
-        <AllProducts products={data}></AllProducts>
+        <AllProducts products={productsData.data}></AllProducts>
         <Statistics></Statistics>
       </ProtectRoute>
     </>

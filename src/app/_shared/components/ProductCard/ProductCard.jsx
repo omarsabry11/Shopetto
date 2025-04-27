@@ -8,14 +8,8 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import StarRateIcon from '@mui/icons-material/StarRate';
-// type Props = {
-//   product: Product;
-//   onAddToWishList?: () => void;
-//   handleChangeSelectedProduct?: () => void;
-//   onRemoveFromWishList?: () => void;
-// };
-export default function ProductCard({
+import StarRateIcon from "@mui/icons-material/StarRate";
+function ProductCard({
   product,
   onAddToWishList = () => {},
   productIds = [],
@@ -46,7 +40,6 @@ export default function ProductCard({
             } `}
           >
             {addToWishlistLoading && selectedProductId === product._id ? (
-
               <div className="w-5 h-5 border-4 border-gray-200 border-t-main rounded-full animate-spin mt-1"></div>
             ) : (
               <FavoriteIcon
@@ -81,6 +74,8 @@ export default function ProductCard({
             alt={product.title}
             width={250}
             height={250}
+            layout="responsive"
+            quality={80}
           ></Image>
         </div>
         <div>
@@ -114,7 +109,9 @@ export default function ProductCard({
                 </p>
               </div>
               <div className="flex items-center gap-1 ">
-                <StarRateIcon sx={{ color: "#FFA439", fontSize: "16px" }}></StarRateIcon>
+                <StarRateIcon
+                  sx={{ color: "#FFA439", fontSize: "16px" }}
+                ></StarRateIcon>
                 <p className="text-[#7c818b] text-sm font-[500]">
                   {product.ratingsAverage}
                 </p>
@@ -169,3 +166,5 @@ export default function ProductCard({
     </>
   );
 }
+
+export default React.memo(ProductCard);
