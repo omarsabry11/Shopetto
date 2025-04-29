@@ -82,7 +82,7 @@ export default function CartCostDetails({
                 />
                 <label
                   htmlFor="bordered-radio-2"
-                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900cursor-pointer"
+                  className="w-full py-4 ms-2 text-sm font-medium text-gray-900 cursor-pointer"
                 >
                   Online payment
                 </label>

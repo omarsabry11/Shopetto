@@ -9,6 +9,7 @@ import TokenContextProvider from "./_core/_contexts/tokenContext";
 import WishlistContextProvider from "./_core/_contexts/wishlistContext";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],

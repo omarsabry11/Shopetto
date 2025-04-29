@@ -28,8 +28,6 @@ export default function FeaturedProducts({ products, title }) {
   const [allProducts, setAllProducts] = useState(products);
   const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-  const [isShowingAllProducts, setIsShowingAllProducts] = useState(false);
-
   const [selectedProductId, setSelectedProductId] = useState(null);
 
   const [selectedAddedProductId, setSelectedAddedProductId] = useState(null);

@@ -7,6 +7,9 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function ProductItemDetails({ data }) {
   const { addUserCart } = useContext(CartContext);
@@ -45,34 +48,47 @@ export default function ProductItemDetails({ data }) {
     setIsLoading(false);
     console.log("rrrrrrrrrr", res);
   };
+
+  const settings = {
+    customPaging: function (i) {
+      return (
+        <a>
+          <Image
+            src={`${data?.images[i]}`}
+            height={80}
+            width={80}
+            alt={`product image ${i + 1}`}
+            className="mx-auto p-1 "
+          />
+        </a>
+      );
+    },
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <>
       <section className="mt-10 mb-20">
         <div className="flex gap-8 max-lg:flex-col">
-          <div className="flex-1">
-            <div className="p-10">
-              <Image
-                className="mx-auto p-1 "
-                src={data?.imageCover || ""}
-                height={500}
-                width={400}
-                alt={data?.title}
-                priority
-              />
-            </div>
-
-            <div className="flex items-center justify-center flex-wrap gap-5 mt-5">
-              {data?.images.slice(0, 4).map((image, index) => (
-                <Image
-                  className="border border-gray-300 p-1 cursor-pointer"
-                  key={index}
-                  src={image}
-                  height={80}
-                  width={80}
-                  alt={`product image ${index + 1}`}
-                />
+          <div className="w-[40%] max-lg:w-full bg-blue">
+            <Slider {...settings}>
+              {data?.images?.slice(0, 4).map((image, index) => (
+                <div key={index}>
+                  <Image
+                    src={image}
+                    layout="responsive"
+                    width={400}
+                    height={400}
+                    alt={`product image ${index + 1}`}
+                    className="mx-auto p-1"
+                  />
+                </div>
               ))}
-            </div>
+            </Slider>
           </div>
 
           <div className="my-10 text-[#292929] flex-1">
@@ -95,23 +111,12 @@ export default function ProductItemDetails({ data }) {
               <span className="text-[#d8d9dc]">|</span>
               <div className="flex items-center gap-1.5">
                 <div className="flex items-center ">
-                  <StarRateIcon
-                    sx={{ color: "#FFA439", fontSize: "16px" }}
-                  ></StarRateIcon>
-                  <StarRateIcon
-                    sx={{ color: "#FFA439", fontSize: "16px" }}
-                  ></StarRateIcon>
-                  <StarRateIcon
-                    sx={{ color: "#FFA439", fontSize: "16px" }}
-                  ></StarRateIcon>
-                  <StarRateIcon
-                    sx={{ color: "#FFA439", fontSize: "16px" }}
-                  ></StarRateIcon>
-                  <StarRateIcon
-                    sx={{ color: "#FFA439", fontSize: "16px" }}
-                  ></StarRateIcon>
-
-               
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <StarRateIcon
+                      key={index}
+                      sx={{ color: "#FFA439", fontSize: "16px" }}
+                    ></StarRateIcon>
+                  ))}
                 </div>
 
                 <p className="text-[#7c818b] text-sm">
@@ -213,7 +218,7 @@ export default function ProductItemDetails({ data }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 w-[80%]">
+            <div className="flex items-center gap-4 w-[80%] max-lg:w-full max-lg:mt-10">
               <button
                 onClick={() => addToCart(data._id)}
                 className="bg-main flex items-center justify-center text-white px-5 h-[3rem] rounded-sm cursor-pointer flex-1"
