@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Shoppeto - E-commerce Web Application
 
-## Getting Started
+**Shoppeto** is a modern, responsive e-commerce web application built with the latest technologies to deliver a fast, scalable, and user-friendly shopping experience.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🔐 Authentication:
+  - Login / Register
+  - Forgot Password
+- 🛍️ Shop:
+  - Browse Products
+  - Add to Cart / Wishlist
+  - Place Orders
+- 👤 User:
+  - View Orders
+  - Manage Wishlist and Cart
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧰 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **HTML5, CSS3, Tailwind CSS**
+- **JavaScript, TypeScript**
+- **React 19**
+- **Next.js 15**
 
-## Learn More
+### Libraries & Tools:
 
-To learn more about Next.js, take a look at the following resources:
+- **Formik** & **Yup** – Form handling and validation
+- **React Slick Slider** – Product carousels
+- **React Toastify** – Notification system
+- **TanStack Query** – Data fetching and caching
+- **Material UI (MUI)** – UI components
+- **JWT Decode** – Decode JWT tokens
+- **Axios** – API requests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
