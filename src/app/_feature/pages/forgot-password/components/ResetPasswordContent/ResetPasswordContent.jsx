@@ -7,7 +7,6 @@ import { useState } from "react";
 import * as Yup from "yup";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useRouter } from "next/navigation";
-import ToastContainerClient from "@/app/_core/components/ToastContainerClient/ToastContainerClient";
 import { toast } from "react-toastify";
 
 export default function ResetPasswordContent({ userEmail }) {
@@ -30,7 +29,7 @@ export default function ResetPasswordContent({ userEmail }) {
         toast.success(res?.data?.message);
         setTimeout(() => {
           router.push("/login");
-        }, 1000);
+        }, 800);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +48,6 @@ export default function ResetPasswordContent({ userEmail }) {
 
   return (
     <>
-      <ToastContainerClient></ToastContainerClient>
       <div className="flex-1">
         <Link
           href={"/login"}

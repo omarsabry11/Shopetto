@@ -2,12 +2,10 @@
 import DotLoader from "@/app/_core/components/DotLoader/DotLoader";
 import axios from "axios";
 import { useFormik } from "formik";
-
 import Link from "next/link";
 import { useState } from "react";
 import * as Yup from "yup";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ToastContainerClient from "@/app/_core/components/ToastContainerClient/ToastContainerClient";
 import { toast } from "react-toastify";
 
 export default function VerifyCodeContent({ onChangeFormType }) {
@@ -47,7 +45,7 @@ export default function VerifyCodeContent({ onChangeFormType }) {
 
   return (
     <>
-    <ToastContainerClient></ToastContainerClient>
+    
     
     <div className="flex-1">
       <Link
