@@ -24,7 +24,7 @@ export default function ResetPasswordContent({ userEmail }) {
   function onsubmit(val) {
     setIsLoading(true);
     axios
-      .post("https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords", val)
+      .put("https://ecommerce.routemisr.com/api/v1/auth/resetPassword", val)
       .then((res) => {
         toast.success(res?.data?.message);
         setTimeout(() => {

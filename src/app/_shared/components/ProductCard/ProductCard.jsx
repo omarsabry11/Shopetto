@@ -113,7 +113,7 @@ function ProductCard({
                   sx={{ color: "#FFA439", fontSize: "16px" }}
                 ></StarRateIcon>
                 <p className="text-[#7c818b] text-sm font-[500]">
-                  {product.ratingsAverage}
+                  {product?.ratingsAverage}
                 </p>
               </div>
             </div>
@@ -121,9 +121,9 @@ function ProductCard({
             <div className="flex items-center gap-1">
               <div
                 className="w-5 h-5 bg-contain bg-no-repeat bg-center rounded-full"
-                style={{ backgroundImage: `url(${product.brand.image})` }}
+                style={{ backgroundImage: `url(${product?.brand?.image})` }}
               ></div>
-              <p className="text-xs">{product.brand.name}</p>
+              <p className="text-xs">{product?.brand?.name}</p>
             </div>
           </div>
         </div>
